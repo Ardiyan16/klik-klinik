@@ -67,6 +67,21 @@
  <!-- Custom Theme Scripts -->
  <script src="<?= base_url() ?>assets/back/build/js/custom.min.js"></script>
 
+ <script src="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.js"></script>
+ <script>
+     $(function() {
+         // Summernote
+         $('#summernote').summernote();
+         $('#summernote2').summernote()
+
+         // // CodeMirror
+         // CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+         //   mode: "htmlmixed",
+         //   theme: "monokai"
+     });
+     
+ </script>
+
  </body>
 
  </html>

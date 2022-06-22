@@ -27,7 +27,7 @@
     <!-- bootstrap-daterangepicker -->
     <link href="<?= base_url() ?>assets/back/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
-    <!-- Datatables --> 
+    <!-- Datatables -->
     <link href="<?= base_url() ?>assets/back/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/back/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/back/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
@@ -36,6 +36,10 @@
 
     <!-- Custom Theme Style -->
     <link href="<?= base_url() ?>assets/back/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.css">
+
+    <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
 <body class="nav-md">
@@ -52,7 +56,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="<?= base_url() ?>assets/img/owner.png" alt="..." class="img-circle profile_img">
+                            <img src="<?= base_url('assets/img/image_team/' . $this->session->userdata('picture')) ?>" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -75,6 +79,9 @@
                                     <a href="<?= base_url('Owner/team') ?>"><i class="fa fa-users"></i> team</a>
                                 </li>
                                 <li>
+                                    <a href="<?= base_url('Owner/visi_misi') ?>"><i class="fa fa-file"></i> Visi & Misi</a>
+                                </li>
+                                <li>
                                     <a href="javascript:void(0)"><i class="fa fa-book"></i> Pembukuan</a>
                                 </li>
                             </ul>
@@ -94,7 +101,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <a data-toggle="modal" data-placement="top" title="Logout" href="#logout">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -112,14 +119,33 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?= base_url() ?>assets/img/owner.png" alt="">John Doe
+                                    <img src="<?= base_url('assets/img/image_team/' . $this->session->userdata('picture')) ?>" alt=""><?= $this->session->userdata('nama') ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?= base_url('Auth/logout') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    <a class="dropdown-item" href="#logout" data-toggle="modal"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
                             </li>
                         </ul>
                     </nav>
+                </div>
+            </div>
+            <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            silahkan tekan tombol logout untuk keluar
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <a href="<?= base_url('Auth/logout_backend') ?>" class="btn btn-primary"><i class="fa fa-sign-out"></i> Log Out</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /top navigation -->

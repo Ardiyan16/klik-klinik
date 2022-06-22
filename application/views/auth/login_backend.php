@@ -23,6 +23,9 @@
 
     <!-- Custom Theme Style -->
     <link href="<?= base_url() ?>assets/back/build/css/custom.min.css" rel="stylesheet">
+
+    <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
 <body class="login">
@@ -33,15 +36,18 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form>
+                    <form method="post" action="<?= base_url('Auth/action_login') ?>">
                         <img src="<?= base_url() ?>assets/img/logo-klik-klinik.png" height="150" width="400">
                         <h1>Login Form</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username" />
+                            <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
+                            <input type="text" class="form-control" name="username" placeholder="Username" />
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" />
+                            <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
+                            <input type="password" class="form-control" name="password" placeholder="Password" />
                         </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</button>
                         <div class="clearfix"></div>
 
                         <div class="separator">
@@ -59,5 +65,53 @@
         </div>
     </div>
 </body>
+<script>
+    <?php if ($this->session->flashdata('gagal')) : ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'Anda gagal untuk login!',
+            text: 'Role anda tidak ditemukan!',
+            showConfirmButton: true,
+            // timer: 1500
+        })
+
+    <?php elseif ($this->session->flashdata('password_salah')) : ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'Anda gagal untuk login!',
+            text: 'password anda salah!',
+            showConfirmButton: true,
+            // timer: 1500
+        })
+
+    <?php elseif ($this->session->flashdata('tidak_aktif')) : ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'Anda gagal untuk login!',
+            text: 'akun anda belum dikonfirmasi!',
+            showConfirmButton: true,
+            // timer: 1500
+        })
+
+
+    <?php elseif ($this->session->flashdata('username_salah')) : ?>
+        Swal.fire({
+            icon: 'error',
+            title: 'Anda gagal untuk login!',
+            text: 'username anda salah!',
+            showConfirmButton: true,
+            // timer: 1500
+        })
+
+    <?php elseif ($this->session->flashdata('logout')) : ?>
+        Swal.fire({
+            icon: 'success',
+            title: 'Anda berhasil logout!',
+            text: 'silahkan login untuk masuk kembali!',
+            showConfirmButton: true,
+            // timer: 1500
+        })
+    <?php endif ?>
+</script>
 
 </html>
