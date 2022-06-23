@@ -64,6 +64,12 @@
  <script src="<?= base_url() ?>assets/back/vendors/pdfmake/build/pdfmake.min.js"></script>
  <script src="<?= base_url() ?>assets/back/vendors/pdfmake/build/vfs_fonts.js"></script>
 
+ <!-- bootstrap-daterangepicker -->
+ <script src="<?= base_url() ?>assets/back/vendors/moment/min/moment.min.js"></script>
+ <script src="<?= base_url() ?>assets/back/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+ <!-- bootstrap-datetimepicker -->
+ <script src="<?= base_url() ?>assets/back/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
  <!-- Custom Theme Scripts -->
  <script src="<?= base_url() ?>assets/back/build/js/custom.min.js"></script>
 
@@ -79,7 +85,41 @@
          //   mode: "htmlmixed",
          //   theme: "monokai"
      });
-     
+ </script>
+ <script type="text/javascript">
+     $(function() {
+         $('#myDatepicker').datetimepicker({
+            format: 'MM-DD-YYYY'
+         });
+         
+     });
+
+     $('#myDatepicker2').datetimepicker({
+         format: 'DD.MM.YYYY'
+     });
+
+     $('#myDatepicker3').datetimepicker({
+         format: 'hh:mm A'
+     });
+
+     $('#myDatepicker4').datetimepicker({
+         ignoreReadonly: true,
+         allowInputToggle: true
+     });
+
+     $('#datetimepicker6').datetimepicker();
+
+     $('#datetimepicker7').datetimepicker({
+         useCurrent: false
+     });
+
+     $("#datetimepicker6").on("dp.change", function(e) {
+         $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+     });
+
+     $("#datetimepicker7").on("dp.change", function(e) {
+         $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+     });
  </script>
 
  </body>

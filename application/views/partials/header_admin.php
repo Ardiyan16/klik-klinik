@@ -34,11 +34,14 @@
     <link href="<?= base_url() ?>assets/back/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/back/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap Colorpicker -->
+    <link href="<?= base_url() ?>assets/back/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
     <!-- Custom Theme Style -->
     <link href="<?= base_url() ?>assets/back/build/css/custom.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
@@ -71,7 +74,7 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>Menu Utama</h3>
+                            <h3>Menu Pengobatan</h3>
                             <ul class="nav side-menu">
                                 <li>
                                     <a href="<?= base_url('Admin') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
@@ -83,7 +86,26 @@
                                     <a href="<?= base_url('Owner/konfirmasi_user') ?>"><i class="fa fa-check"></i> Konfirmasi User</a>
                                 </li>
                                 <li>
-                                    <a href=""><i class="fa fa-book"></i> Pembukuan</a>
+                                    <a href="<?= base_url('Owner/konfirmasi_user') ?>"><i class="fa fa-history"></i> Riwayat Pengobatan</a>
+                                </li>
+                            </ul>
+                            <br>
+                            <h3>Menu Konten</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="<?= base_url('Admin/berita') ?>"><i class="fa fa-newspaper-o"></i> Berita</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/jadwal_dokter') ?>"><i class="fa fa-calendar"></i> Jadwal Dokter</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/karir') ?>"><i class="fa fa-briefcase"></i> Karir</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/karir') ?>"><i class="fa fa-handshake"></i> Partner Asuransi</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/karir') ?>"><i class="fas fa-award"></i> Penghargaan</a>
                                 </li>
                             </ul>
                         </div>
