@@ -106,4 +106,14 @@ class Auth extends CI_Controller
         $this->session->set_flashdata('logout', true);
         redirect('Auth');
     }
+
+    public function login()
+    {
+        $this->load->view('auth/login');
+    }
+
+    public function register()
+    {
+        $this->load->view('auth/register');
+    }
 }

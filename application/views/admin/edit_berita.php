@@ -19,7 +19,7 @@
             </div>
             <div class="x_content">
                 <br />
-                <form class="form-horizontal form-label-left" method="post" action="<?= base_url('Admin/save_berita') ?>" enctype="multipart/form-data">
+                <form class="form-horizontal form-label-left" method="post" action="<?= base_url('Admin/update_berita') ?>" enctype="multipart/form-data">
                     <label>Judul</label>
                     <input type="hidden" name="id" value="<?= $edit->id ?>">
                     <input type="text" name="judul" value="<?= $edit->judul ?>" placeholder="Judul..." class="form-control">

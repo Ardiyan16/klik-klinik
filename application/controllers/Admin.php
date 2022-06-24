@@ -116,4 +116,18 @@ class Admin extends CI_Controller
         $this->load->view('admin/edit_berita', $var);
     }
 
+    public function update_berita()
+    {
+        $this->admin->update_berita();
+        $this->session->set_flashdata('success_update', true);
+        redirect('Admin/berita');
+    }
+
+    public function delete_berita($id)
+    {
+        $this->db->delete('berita', ['id' => $id]);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Admin/berita');
+    }
+
 }

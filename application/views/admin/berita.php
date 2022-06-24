@@ -44,7 +44,7 @@
                                             <td>
                                                 <a href="#detail<?= $brt->id ?>" data-toggle="modal" title="lihat foto dan deskripsi" class="badge bg-success" style="color: white;"><i class="fa fa-eye"></i></a>
                                                 <a href="<?= base_url('Admin/edit_berita/' . $brt->id) ?>" title="edit" class="badge bg-primary" style="color: white;"><i class="fa fa-edit"></i></a>
-                                                <a href="<?= base_url('Admin/delete_karir/' . $brt->id) ?>" onclick="return confirm('apakah anda yakin menghapus data ?')" title="Hapus" class="badge bg-danger" style="color: white;"><i class="fa fa-trash"></i></a>
+                                                <a href="<?= base_url('Admin/delete_berita/' . $brt->id) ?>" onclick="return confirm('apakah anda yakin menghapus data ?')" title="Hapus" class="badge bg-danger" style="color: white;"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php } ?>
