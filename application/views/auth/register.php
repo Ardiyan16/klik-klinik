@@ -33,7 +33,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="tempat-lahir"><i class="fa fa-map-marker"></i></label>
-                                <input type="text" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat Lahir" />
+                                <input type="text" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat Lahir"/>
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
