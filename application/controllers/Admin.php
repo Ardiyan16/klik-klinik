@@ -14,7 +14,49 @@ class Admin extends CI_Controller
     public function index()
     {
         $var['title'] = 'Admin | Dashboard';
+        $var['notif_new_user'] = $this->admin->notifikasi_new_user();
+        $var['jml_notif'] = $this->admin->count_notif_user();
         $this->load->view('admin/dashboard', $var);
+    }
+
+    public function konfirmasi_user()
+    {
+        $var['title'] = 'Admin | Konfirmasi User';
+        $var['user'] = $this->admin->get_users();
+        // $var['user3'] = $this->admin->get_users();
+        $var['user2'] = $this->admin->get_users();
+        $this->load->view('admin/pengobatan/konfirmasi_user', $var);
+    }
+
+    public function create_no_rekmed($nik)
+    {
+        $var['title'] = 'Admin | Tambah No Rekam Medis';
+        $var['view'] = $this->db->get_where('users', ['nik' => $nik])->row();
+        $this->load->view('admin/pengobatan/create_norekmed', $var);
+    }
+
+    public function save_no_rekmed()
+    {
+        $this->form_validation->set_rules('no_rekmed', 'No Rekam Medis', 'required|trim|is_unique[users.no_rekmed]|max_length[12]', ['is_unique' => 'No rekam medis sudah terdaftar', 'max_length' => 'No rekam medis tidak lebih dari 12 karakter', 'required' => 'No rekam medis tidak boleh kosong']);
+        if ($this->form_validation->run() == false) {
+            $nik = $this->input->post('nik');
+            $this->create_no_rekmed($nik);
+        } else {
+            $nik = $this->input->post('nik');
+            $no_rekmed = $this->input->post('no_rekmed');
+            $this->db->set('no_rekmed', $no_rekmed);
+            $this->db->where('nik', $nik);
+            $this->db->update('users');
+            $this->session->set_flashdata('success_create_norekmed', true);
+            redirect('Admin/konfirmasi_user');
+        }
+    }
+
+    public function konfirmasi_status_user($nik)
+    {
+        $this->admin->status_terkonfirmasi($nik);
+        $this->session->set_flashdata('success_terkonfirmasi', true);
+        redirect('Admin/konfirmasi_user');
     }
 
     public function profile()
@@ -130,4 +172,83 @@ class Admin extends CI_Controller
         redirect('Admin/berita');
     }
 
+    public function jadwal_dokter()
+    {
+        $var['title'] = 'Admin | Jadwal Dokter';
+        $var['jadwal_dokter'] = $this->admin->get_jadwal_dokter();
+        $this->load->view('admin/jadwal_dokter', $var);
+    }
+
+    public function create_jadwal_dokter()
+    {
+        $var['title'] = 'Admin | Tambah Jadwal Dokter';
+        $var['dokter'] = $this->admin->get_dokter();
+        // var_dump($var['dokter']);
+        $this->load->view('admin/create_jadwaldokter', $var);
+    }
+
+    public function save_jadwal_dokter()
+    {
+        $this->admin->save_jadwal_dokter();
+        $this->session->set_flashdata('success_create', true);
+        redirect('Admin/jadwal_dokter');
+    }
+
+    public function edit_jadwal_dokter($id)
+    {
+        $var['title'] = 'Admin | Edit Jadwal Dokter';
+        $var['dokter'] = $this->admin->get_dokter();
+        $var['edit'] = $this->db->get_where('jadwal_dokter', ['id', $id])->row();
+        $this->load->view('admin/edit_jadwaldokter', $var);
+    }
+
+    public function update_jadwal_dokter()
+    {
+        $this->admin->update_jadwal_dokter();
+        $this->session->set_flashdata('success_update', true);
+        redirect('Admin/jadwal_dokter');
+    }
+
+    public function delete_jadwal_dokter($id)
+    {
+        $this->db->delete('jadwal_dokter', ['id' => $id]);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Admin/jadwal_dokter');
+    }
+
+    public function partner()
+    {
+        $var['title'] = 'Admin | Partner Asuransi';
+        $var['partner'] = $this->admin->get_partner();
+        $var['partner2'] = $this->admin->get_partner();
+        $this->load->view('admin/partner', $var);
+    }
+
+    public function save_partner()
+    {
+        $this->admin->save_partner();
+        $this->session->set_flashdata('success_create', true);
+        redirect('Admin/partner');
+    }
+
+    public function update_partner()
+    {
+        $this->admin->update_partner();
+        $this->session->set_flashdata('success_update', true);
+        redirect('Admin/partner');
+    }
+
+    public function delete_partner($id)
+    {
+        $this->admin->delete_partner($id);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Admin/partner');
+    }
+
+    public function penghargaan()
+    {
+        $var['title'] = 'Admin | Penghargaan';
+        $var['penghargaan'] = $this->admin->get_penghargaan();
+        $this->load->view('admin/penghargaan');
+    }
 }

@@ -1,4 +1,4 @@
-<?php $this->load->view('partials/header_admin.php') ?>
+<?php $this->load->view('partials/header_admin2.php') ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="row">

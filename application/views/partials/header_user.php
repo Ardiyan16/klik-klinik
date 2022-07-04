@@ -60,11 +60,11 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="<?= base_url('assets/img/image_team/' . $this->session->userdata('picture')) ?>" alt="..." class="img-circle profile_img">
+                            <img src="<?= base_url('assets/img/image_team/default_user.png') ?>" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2><?= $this->session->userdata('username') ?></h2>
+                            <h2>user</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -77,37 +77,19 @@
                             <h3>Menu Pengobatan</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="<?= base_url('Admin') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+                                    <a href="<?= base_url('Admin') ?>"><i class="fa fa-user"></i> Profile</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran</a>
+                                    <a href="<?= base_url('Owner/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran Online</a>
                                 </li>
+                                <!-- <li>
+                                    <a href="<?= base_url('Admin/konfirmasi_user') ?>"><i class="fa fa-check"></i> Cek</a>
+                                </li> -->
                                 <li>
-                                    <a href="<?= base_url('Admin/konfirmasi_user') ?>"><i class="fa fa-check"></i> Konfirmasi User</a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url('Owner/konfirmasi_user') ?>"><i class="fa fa-history"></i> Riwayat Pengobatan</a>
+                                    <a href="<?= base_url('Owner/konfirmasi_user') ?>"><i class="fa fa-history"></i> Riwayat Pengobatan Anda</a>
                                 </li>
                             </ul>
                             <br>
-                            <h3>Menu Konten</h3>
-                            <ul class="nav side-menu">
-                                <li>
-                                    <a href="<?= base_url('Admin/berita') ?>"><i class="fa fa-newspaper-o"></i> Berita</a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url('Admin/jadwal_dokter') ?>"><i class="fa fa-calendar"></i> Jadwal Dokter</a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url('Admin/karir') ?>"><i class="fa fa-briefcase"></i> Karir</a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url('Admin/partner') ?>"><i class="fa fa-handshake"></i> Partner Asuransi</a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url('Admin/karir') ?>"><i class="fas fa-award"></i> Penghargaan</a>
-                                </li>
-                            </ul>
                         </div>
 
                     </div>
@@ -142,7 +124,7 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?= base_url('assets/img/image_team/' . $this->session->userdata('picture')) ?>" alt=""><?= $this->session->userdata('nama') ?>
+                                    <img src="<?= base_url('assets/img/image_team/default_user.png') ?>" alt=""><?= $this->session->userdata('name') ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="<?= base_url('Admin/profile') ?>"> Profile</a>
@@ -167,7 +149,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                            <a href="<?= base_url('Auth/logout_backend') ?>" class="btn btn-primary"><i class="fa fa-sign-out"></i> Log Out</a>
+                            <a href="<?= base_url('Auth/logout_user') ?>" class="btn btn-primary"><i class="fa fa-sign-out"></i> Log Out</a>
                         </div>
                     </div>
                 </div>

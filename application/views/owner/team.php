@@ -57,10 +57,10 @@
                                             <td>
                                                 <?php
                                                 if ($tm->status == 0) {
-                                                    echo "<a href=\"ubah_status_aktif/$tm->id\"  OnClick=\"return confirm('apakah yakin merubah status ke aktif');\" class='badge bg-warning' title='ubah status aktif' style='color: white'><i class='fa fa-times'></i></a>";
+                                                    echo "<a href=\"ubah_status_aktif/$tm->id\"  OnClick=\"return confirm('apakah yakin merubah status ke aktif');\" class='badge bg-success' title='ubah status aktif' style='color: white'><i class='fa fa-check'></i></a>";
                                                 }
                                                 if ($tm->status == 1) {
-                                                    echo "<a href=\"ubah_status_nonaktif/$tm->id\" OnClick=\"return confirm('apakah yakin merubah status ke non aktif');\"' class='badge bg-success' title='ubah status non aktif' style='color: white'><i class='fa fa-check'></i></a>";
+                                                    echo "<a href=\"ubah_status_nonaktif/$tm->id\" OnClick=\"return confirm('apakah yakin merubah status ke non aktif');\"' class='badge bg-warning' title='ubah status non aktif' style='color: white'><i class='fa fa-times'></i></a>";
                                                 }
 
                                                 ?>

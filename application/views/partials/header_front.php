@@ -100,7 +100,7 @@
                                     <a href="contact.html">Contact</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html">Masuk</a>
+                                    <a href="<?= base_url('Auth/login') ?>">Masuk</a>
                                 </li>
                             </ul>
                         </nav>

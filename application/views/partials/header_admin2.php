@@ -149,6 +149,38 @@
                                     <a class="dropdown-item" href="#logout" data-toggle="modal"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
                             </li>
+                            <li role="presentation" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-bell-o"></i>
+                                    <?php if ($jml_notif > 0) { ?>
+                                        <span class="badge bg-green"><?= $jml_notif ?></span>
+                                    <?php } ?>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <?php foreach ($notif_new_user as $notif) { ?>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="<?= base_url('Admin/konfirmasi_user') ?>">
+                                                <span class="message"><i class="fa fa-user"></i>
+                                                    User baru dengan nama <?= $notif->name ?> menunggu konfirmasi
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <hr>
+                                    <?php } ?>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <?php if ($jml_notif == 0) { ?>
+                                                    <strong>Tidak Ada Notifikasi</strong>
+                                                <?php }
+                                                if ($jml_notif > 0) { ?>
+                                                    <strong><?= $jml_notif ?> Notifikasi</strong>
+                                                <?php } ?>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </nav>
                 </div>
