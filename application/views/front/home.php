@@ -21,41 +21,28 @@
                                 <!-- Layer 1 -->
                                 <li>
                                     <div class="info animate-in">
-                                        <h2>Bootstrap based</h2>
+                                        <h2>Klik Klinik</h2>
                                         <br>
-                                        <h3>Corporate business</h3>
+                                        <h3>Melayani Dengan Sepenuh Hati dan Invosasi</h3>
                                         <p>
-                                            Lorem ipsum dolor sit amet, munere commodo ut nam, quod volutpat in per. At nec case iriure, consul recteque nec et.
+                                            Klik Klinik hadir dengan inovasi baru dalam pelayanan kesehatan masyarakat
                                         </p>
-                                        <a class="btn btn-success" href="#">Learn more &raquo;</a>
+                                        <!-- <a class="btn btn-success" href="#">Learn more &raquo;</a> -->
                                     </div>
-                                    <img class="slider_img animate-in" src="assets/img/slides/sequence/img-1.png" alt="">
+                                    <img class="slider_img animate-in" src="<?= base_url('assets/img/bg1.jpg') ?>" alt="">
                                 </li>
                                 <!-- Layer 2 -->
                                 <li>
                                     <div class="info">
-                                        <h2>Smart and fresh</h2>
+                                        <h2>Klik Klinik</h2>
                                         <br>
-                                        <h3>Rich of features</h3>
+                                        <h3>Senyuman adalah salah satu cara terbaik dalam mengatasi berbagai situasi.</h3>
                                         <p>
-                                            Lorem ipsum dolor sit amet, munere commodo ut nam, quod volutpat in per. At nec case iriure, consul recteque nec et.
+                                            Mecoba memberikan pelayanan dengan senyuman dan rasa tanggung jawab.
                                         </p>
-                                        <a class="btn btn-success" href="#">Learn more &raquo;</a>
+                                        <!-- <a class="btn btn-success" href="#">Learn more &raquo;</a> -->
                                     </div>
-                                    <img class="slider_img" src="assets/img/slides/sequence/img-2.png" alt="">
-                                </li>
-                                <!-- Layer 3 -->
-                                <li>
-                                    <div class="info">
-                                        <h2>Far from ugly</h2>
-                                        <br>
-                                        <h3>Latest technology</h3>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, munere commodo ut nam, quod volutpat in per. At nec case iriure, consul recteque nec et.
-                                        </p>
-                                        <a class="btn btn-success" href="#">Learn more &raquo;</a>
-                                    </div>
-                                    <img class="slider_img" src="assets/img/slides/sequence/img-3.png" alt="">
+                                    <img class="slider_img" src="<?= base_url('assets/img/slide2.jpeg') ?>" alt="">
                                 </li>
                             </ul>
                         </div>
@@ -70,34 +57,33 @@
     <div class="container">
         <div class="row">
             <div class="span3 features">
-                <i class="icon-circled icon-32 icon-suitcase left active"></i>
-                <h4>Responsive bootstrap</h4>
+                <i class="icon-circled icon-32 fa fa-clinic-medical left"></i>
+                <h4>Layanan Medis</h4>
                 <div class="dotted_line">
                 </div>
                 <p class="left">
-                    Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                    Klik Klinik memiliki beberapa layanan medis untuk menunjang pelayanan kesehatan di masyarakat
                 </p>
-                <a href="#">Learn more</a>
+                <a href="<?= base_url('Front/layanan_medis') ?>">Lihat Layanan</a>
             </div>
             <div class="span3 features">
-                <i class="icon-circled icon-32 icon-plane left"></i>
-                <h4>Lot of features</h4>
+                <i class="icon-circled icon-32 fa fa-desktop left"></i>
+                <h4>Pelayanan Online</h4>
                 <div class="dotted_line">
                 </div>
                 <p class="left">
-                    Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                    Klik Klinik memberikan pelayanan online untuk para masyarakat guna mempermudah dalam layanan kesehatan
                 </p>
-                <a href="#">Learn more</a>
+                <a href="<?= base_url('Auth/login') ?>">Daftar Online</a>
             </div>
             <div class="span3 features">
-                <i class="icon-circled icon-32 icon-leaf left"></i>
-                <h4>Multipurpose template</h4>
+                <i class="icon-circled icon-32 fa fa-info left"></i>
+                <h4>Informasi Terbaru</h4>
                 <div class="dotted_line">
                 </div>
                 <p class="left">
-                    Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                    Dengan adanya sistem online akan memberikan informasi terbaru dari Klik Klinik.
                 </p>
-                <a href="#">Learn more</a>
             </div>
             <div class="span3 features">
                 <i class="icon-circled icon-32 icon-wrench left"></i>
@@ -116,128 +102,123 @@
                     <div class="row">
                         <div class="span12">
                             <div class="tagline_text">
-                                <h2>Don't miss this special offer for limited time only!</h2>
+                                <h2>Layanan Online Klik Klinik!</h2>
                                 <p>
-                                    Lorem ipsum dolor sit amet, vix ceteros noluisse intellegat ne, ex nec insolens liberavisse, no adhuc causae nominati duo.
+                                    Klik Klinik menghadirkan pelayanan online untuk masyarakat.
                                 </p>
                             </div>
                             <div class="btn-toolbar cta">
-                                <a class="btn btn-large btn-color" href="#">
-                                    <i class="icon-plane icon-white"></i> Try free version </a>
-                                <a class="btn btn-large btn-inverse" href="#">
-                                    <i class="icon-shopping-cart icon-white"></i> Buy license </a>
+                                <a class="btn btn-large btn-color" href="<?= base_url('Auth/login') ?>">
+                                    <i class="icon-plane icon-white"></i> Pelayanan Online </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- end tagline -->
             </div>
         </div>
         <div class="row">
             <div class="home-posts">
                 <div class="span12">
-                    <h3>Recent blog posts</h3>
+                    <h3>Artikel Terbaru</h3>
                 </div>
-                <div class="span3">
-                    <div class="post-image">
-                        <a href="post_right_sidebar.html">
-                            <img src="assets/img/dummies/blog1.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="entry-meta">
-                        <a href="#"><i class="icon-square icon-48 icon-pencil left"></i></a>
-                        <span class="date">Sep 17 <br>
-                            2013</span>
-                    </div>
-                    <!-- end .entry-meta -->
-                    <div class="entry-body">
-                        <a href="post_right_sidebar.html">
-                            <h5 class="title">This is a standard post</h5>
-                        </a>
-                        <p>
-                            Lorem ipsum dolor sit amet nec, consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean massa.
-                        </p>
-                    </div>
-                    <!-- end .entry-body -->
-                    <div class="clear">
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="post-image">
-                        <a href="#"><img src="assets/img/dummies/blog2.jpg" alt=""></a>
-                    </div>
-                    <div class="entry-meta">
-                        <a href="#"><i class="icon-square icon-48 icon-pencil left"></i></a>
-                        <span class="date">Sep 17 2013</span>
-                    </div>
-                    <!-- end .entry-meta -->
-                    <div class="entry-body">
-                        <a href="post_right_sidebar.html">
-                            <h5 class="title">Example post image format</h5>
-                        </a>
-                        <p>
-                            Lorem ipsum dolor sit amet nec, consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean massa.
-                        </p>
-                    </div>
-                    <!-- end .entry-body -->
-                    <div class="clear">
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="post-image">
-                        <a href="#"><img src="assets/img/dummies/blog2.jpg" alt=""></a>
-                    </div>
-                    <div class="entry-meta">
-                        <a href="#"><i class="icon-square icon-48 icon-facetime-video left"></i></a>
-                        <span class="date">Sep 17 2011</span>
-                    </div>
-                    <!-- end .entry-meta -->
-                    <div class="entry-body">
-                        <a href="post_right_sidebar.html">
-                            <h5 class="title">Amazing video post format</h5>
-                        </a>
-                        <p>
-                            Lorem ipsum dolor sit amet nec, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
-                        </p>
-                    </div>
-                    <!-- end .entry-body -->
-                    <div class="clear">
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="post-slider">
-                        <!-- start flexslider -->
-                        <div class="flexslider">
-                            <ul class="slides">
-                                <li>
-                                    <a href="post_right_sidebar.html"><img src="assets/img/dummies/work1.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="post_right_sidebar.html"><img src="assets/img/dummies/work2.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="post_right_sidebar.html"><img src="assets/img/dummies/work3.jpg" alt=""></a>
-                                </li>
-                            </ul>
+                <?php foreach ($artikel as $view) { ?>
+                    <div class="span3">
+                        <div class="post-image">
+                            <a href="<?= base_url('Front/full_page_artikel/' . $view->id) ?>">
+                                <img src="<?= base_url('assets/img/image_berita/' . $view->images) ?>" alt="">
+                            </a>
                         </div>
-                        <!-- end flexslider -->
+                        <div class="entry-meta">
+                            <a href="#" title="artikel"><i class="icon-square icon-48 icon-pencil left"></i></a>
+                            <span class="date"><?= date('d-m-Y', strtotime($view->tanggal)) ?></span>
+                        </div>
+                        <!-- end .entry-meta -->
+                        <div class="entry-body">
+                            <a href="<?= base_url('Front/full_page_artikel/' . $view->id) ?>">
+                                <h5 class="title"><?= $view->judul ?></h5>
+                            </a>
+                            <p>
+                                <?= substr($view->deskripsi, 0, 100) ?>...
+                            </p>
+                        </div>
+                        <!-- end .entry-body -->
+                        <div class="clear">
+                        </div>
                     </div>
-                    <div class="entry-meta">
-                        <a href="#"><i class="icon-square icon-48 icon-picture left"></i></a>
-                        <span class="date">Sep 17 2011</span>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="tagline centered">
+        </div>
+        <div class="row">
+            <div class="home-posts">
+                <div class="span12">
+                    <h3>Berita Terbaru</h3>
+                </div>
+                <?php foreach ($berita as $view) { ?>
+                    <div class="span3">
+                        <div class="post-image">
+                            <a href="<?= base_url('Front/full_page_artikel/' . $view->id) ?>">
+                                <img src="<?= base_url('assets/img/image_berita/' . $view->images) ?>" alt="">
+                            </a>
+                        </div>
+                        <div class="entry-meta">
+                            <a href="#" title="artikel"><i class="icon-square icon-48 icon-pencil left"></i></a>
+                            <span class="date"><?= date('d-m-Y', strtotime($view->tanggal)) ?></span>
+                        </div>
+                        <!-- end .entry-meta -->
+                        <div class="entry-body">
+                            <a href="<?= base_url('Front/full_page_artikel/' . $view->id) ?>">
+                                <h5 class="title"><?= $view->judul ?></h5>
+                            </a>
+                            <p>
+                                <?= substr($view->deskripsi, 0, 100) ?>...
+                            </p>
+                        </div>
+                        <!-- end .entry-body -->
+                        <div class="clear">
+                        </div>
                     </div>
-                    <!-- end .entry-meta -->
-                    <div class="entry-body">
-                        <a href="post_right_sidebar.html">
-                            <h5 class="title">Slider post format with flexslider</h5>
-                        </a>
-                        <p>
-                            Lorem ipsum dolor sit amet nec, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.
-                        </p>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div class="tagline centered">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="tagline_text">
+                                <h2>Partner Kami</h2>
+                                <p>
+                                    Berikut merupakan partner asuransi kami.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <!-- end .entry-body -->
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <ul class="portfolio-area da-thumbs">
+                <?php foreach ($partner as $view) { ?>
+                    <li class="portfolio-item2" data-id="id-0" data-type="web">
+                        <div class="span3">
+                            <div class="thumbnail">
+                                <div class="image-wrapp">
+                                    <img src="<?= base_url('assets/img/image_partner/' . $view->images_partner) ?>" alt="<?= $view->nama_partner ?>" title="" />
+                                    <article class="da-animate da-slideFromRight" style="display: block;">
+                                        <h4><?= $view->nama_partner ?></h4>
+                                        <a href="#"><i class="icon-rounded icon-48 icon-link"></i></a>
+                                        <span><a class="zoom" data-pretty="prettyPhoto" href="<?= base_url('assets/img/image_partner/' . $view->images_partner) ?>">
+                                                <i class="icon-rounded icon-48 icon-zoom-in"></i>
+                                            </a></span>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>
         </div>
     </div>
 </section>

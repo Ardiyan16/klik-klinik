@@ -3,7 +3,7 @@
     <div class="page-title">
         <div class="title_left">
             <h3>Penghargaan</h3>
-            <a href="<?= base_url('Admin/create_karir') ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Penghargaan</a>
+            <a href="<?= base_url('Admin/create_penghargaan') ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Penghargaan</a>
         </div>
     </div>
     <div class="col-md-12 col-sm-12 ">
@@ -25,46 +25,28 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
-                                        <th>Dibutuhkan</th>
-                                        <th>Syarat</th>
-                                        <th>Batas Akhir</th>
-                                        <th>status</th>
+                                        <th>Kategori</th>
+                                        <th>Deskripsi</th>
+                                        <th>Tanggal Diperoleh</th>
+                                        <th>Images</th>
                                         <th>Option</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1;
-                                    foreach ($karir as $kr) {
+                                    foreach ($penghargaan as $archive) {
                                     ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
-                                            <td><?= $kr->bidang ?></td>
-                                            <td><?= $kr->jml_dibutuhkan . ' Orang' ?></td>
-                                            <td><?= $kr->syarat_kebutuhan ?></td>
-                                            <td><?= date('d-m-Y', strtotime($kr->batas_akhir)) ?></td>
+                                            <td><?= $archive->nama ?></td>
+                                            <td><?= $archive->kategori ?></td>
+                                            <td><?= $archive->deskripsi ?></td>
+                                            <td><?= date('d-m-Y', strtotime($archive->tgl_diperoleh)) ?></td>
+                                            <td><img src="<?= base_url('assets/img/image_penghargaan/' . $archive->images) ?>" width="100"></td>
                                             <td>
-                                                <?php
-                                                if ($kr->status == 0) {
-                                                    echo "<span class='badge badge-danger' style='color: white;'>Rekrutmen Tutup</span>";
-                                                }
-                                                if ($kr->status == 1) {
-                                                    echo "<span class='badge badge-success' style='color: white;'>Rekrutmen Buka</span>";
-                                                }
-
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                if ($kr->status == 0) {
-                                                    echo "<a href=\"ubah_status_buka/$kr->id\" OnClick=\"return confirm('apakah yakin merubah status ke buka');\"' class='badge bg-success' title='buka rekrutmen' style='color: white'><i class='fa fa-check'></i></a>";
-                                                }
-                                                if ($kr->status == 1) {
-                                                    echo "<a href=\"ubah_status_tutup/$kr->id\"  OnClick=\"return confirm('apakah yakin merubah status ke tutup');\" class='badge bg-warning' title='tutup rekrutmen' style='color: black'><i class='fa fa-times'></i></a>";
-                                                }
-
-                                                ?>
-                                                <a href="<?= base_url('Admin/edit_karir/' . $kr->id) ?>" title="edit" class="badge bg-primary" style="color: white;"><i class="fa fa-edit"></i></a>
-                                                <a href="<?= base_url('Admin/delete_karir/' . $kr->id) ?>" onclick="return confirm('apakah anda yakin menghapus data ?')" title="Hapus" class="badge bg-danger" style="color: white;"><i class="fa fa-trash"></i></a>
+                                                <a href="#view_foto<?= $archive->id ?>" data-toggle="modal" class="badge bg-success" style="color: white;" title="Lihat Foto"><i class="fa fa-eye"></i></a>
+                                                <a href="<?= base_url('Admin/edit_penghargaan/' . $archive->id) ?>" title="edit" class="badge bg-primary" style="color: white;"><i class="fa fa-edit"></i></a>
+                                                <a href="<?= base_url('Admin/delete_penghargaan/' . $archive->id) ?>" onclick="return confirm('apakah anda yakin menghapus data ?')" title="Hapus" class="badge bg-danger" style="color: white;"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -77,29 +59,33 @@
         </div>
     </div>
 </div>
+<?php foreach ($view_images as $picture) { ?>
+    <div class="modal fade" id="view_foto<?= $picture->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Images</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <img src="<?= base_url('assets/img/image_penghargaan/' . $picture->images) ?>" height="300" width="500">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 <script>
     <?php if ($this->session->flashdata('success_create')) : ?>
         Swal.fire({
             icon: 'success',
             title: 'Data berhasil ditambahkan!',
-            showConfirmButton: true,
-            // timer: 1500
-        })
-
-
-    <?php elseif ($this->session->flashdata('success_open')) : ?>
-        Swal.fire({
-            icon: 'success',
-            title: 'Rekrutmen telah dibuka!',
-            showConfirmButton: true,
-            // timer: 1500
-        })
-
-
-    <?php elseif ($this->session->flashdata('success_close')) : ?>
-        Swal.fire({
-            icon: 'success',
-            title: 'Rekrutmen telah ditutup!',
             showConfirmButton: true,
             // timer: 1500
         })

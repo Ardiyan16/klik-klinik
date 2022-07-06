@@ -3,14 +3,14 @@
 <div class="right_col" role="main">
     <div class="page-title">
         <div class="title_left">
-            <h3>Tambah Berita</h3>
-            <a href="<?= base_url('Admin/berita') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
+            <h3>Tambah Jadwal Vaksinasi</h3>
+            <a href="<?= base_url('Admin/jadwal_vaksinasi') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
         </div>
     </div>
     <div class="col-md-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>From Tambah Berita</h2>
+                <h2>From Tambah Jadwal Vaksinasi</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -19,9 +19,12 @@
             </div>
             <div class="x_content">
                 <br />
-                <form class="form-horizontal form-label-left" method="post" action="<?= base_url('Admin/save_berita') ?>" enctype="multipart/form-data">
+                <form class="form-horizontal form-label-left" method="post" action="<?= base_url('Admin/save_jadwal_vaksinasi') ?>" enctype="multipart/form-data">
                     <label>Judul</label>
                     <input type="text" name="judul" placeholder="Judul..." class="form-control">
+                    <br>
+                    <label>Jenis Vaksin</label>
+                    <input type="text" name="jenis_vaksin" placeholder="Jenis Vaksin..." class="form-control">
                     <br>
                     <label>Tanggal</label>
                     <br>
@@ -29,17 +32,17 @@
                     <br>
                     <br>
                     <br>
-                    <label>Tag</label>
-                    <input type="text" name="tag" placeholder="Tag..." class="form-control">
+                    <label>Jam Mulai</label>
                     <br>
-                    <label>Deskripsi / Isi Berita</label>
-                    <textarea id="summernote" name="deskripsi" rows="12"></textarea>
+                    <input type="time" name="jam_mulai" placeholder="Tag..." class="form-control col-md-3">
                     <br>
-                    <label>Kategori</label>
-                    <select name="kategori" class="form-control">
-                        <option value="1">Berita</option>
-                        <option value="2">Artikel</option>
-                    </select>
+                    <br>
+                    <br>
+                    <label>Jam Selesai</label>
+                    <br>
+                    <input type="time" name="jam_selesai" placeholder="Tag..." class="form-control col-md-3">
+                    <br>
+                    <br>
                     <br>
                     <label>Images</label>
                     <input type="file" name="images" placeholder="Judul..." class="form-control">

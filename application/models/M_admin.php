@@ -10,6 +10,8 @@ class M_admin extends CI_Model
     private $partner = 'partner';
     private $users = 'users';
     private $penghargaan = 'penghargaan';
+    private $jadwal_vaksinasi = 'jadwal_vaksinasi';
+    private $poli = 'poliklinik';
 
     public function get_users()
     {
@@ -53,6 +55,16 @@ class M_admin extends CI_Model
     public function get_penghargaan()
     {
         return $this->db->get($this->penghargaan)->result();
+    }
+
+    public function get_jadwal_vaksinasi()
+    {
+        return $this->db->order_by('id', 'desc')->get($this->jadwal_vaksinasi)->result();
+    }
+
+    public function get_poli()
+    {
+        return $this->db->get($this->poli)->result();
     }
 
     public function notifikasi_new_user()
@@ -110,6 +122,11 @@ class M_admin extends CI_Model
         $this->db->query("UPDATE `users` SET `status`= '1' WHERE users.nik ='$nik'");
     }
 
+    public function vaksinasi_selesai($id)
+    {
+        $this->db->query("UPDATE `jadwal_vaksinasi` SET `status`= '2' WHERE jadwal_vaksinasi.id ='$id'");
+    }
+
     public function update_karir()
     {
         $post = $this->input->post();
@@ -128,6 +145,7 @@ class M_admin extends CI_Model
         $this->tanggal = $post['tanggal'];
         $this->tag = $post['tag'];
         $this->deskripsi = $post['deskripsi'];
+        $this->kategori = $post['kategori'];
         $this->images = $this->upload_imagesBerita();
         $this->penulis = $this->session->userdata('username');
         $this->db->insert($this->berita, $this);
@@ -141,6 +159,7 @@ class M_admin extends CI_Model
         $this->tanggal = $post['tanggal'];
         $this->tag = $post['tag'];
         $this->deskripsi = $post['deskripsi'];
+        $this->kategori = $post['kategori'];
         if (!empty($_FILES["images"]["name"])) {
             $this->images = $this->upload_imagesBerita();
         } else {
@@ -263,4 +282,147 @@ class M_admin extends CI_Model
             return array_map('unlink', glob(FCPATH . "/assets/img/image_partner/$filename.*"));
         }
     }
+
+    public function save_penghargaan()
+    {
+        $post = $this->input->post();
+        $this->nama = $post['nama'];
+        $this->kategori = $post['kategori'];
+        $this->deskripsi = $post['deskripsi'];
+        $this->tgl_diperoleh = $post['tgl_diperoleh'];
+        $this->images = $this->upload_imagesPenghargaan();
+        $this->db->insert($this->penghargaan, $this);
+    }
+
+    public function update_penghargaan()
+    {
+        $post = $this->input->post();
+        $this->id = $post['id'];
+        $this->nama = $post['nama'];
+        $this->kategori = $post['kategori'];
+        $this->deskripsi = $post['deskripsi'];
+        $this->tgl_diperoleh = $post['tgl_diperoleh'];
+        if (!empty($_FILES["images"]["name"])) {
+            $this->images = $this->upload_imagesPenghargaan();
+        } else {
+            $this->images = $post["old_images"];
+        }
+        $this->db->update($this->penghargaan, $this, ['id' => $post['id']]);
+    }
+
+    private function upload_imagesPenghargaan()
+    {
+        $config['upload_path']          = './assets/img/image_penghargaan/';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $nama_lengkap = $_FILES['images']['name'];
+        $config['file_name']            = $nama_lengkap;
+        $config['overwrite']            = true;
+        $config['max_size']             = 3024;
+
+        $this->upload->initialize($config);
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('images')) {
+            return $this->upload->data("file_name");
+        }
+        print_r($this->upload->display_errors());
+    }
+
+    public function delete_penghargaan($id)
+    {
+        $this->hapus_fotoPenghargaan($id);
+        return $this->db->delete($this->penghargaan, array("id" => $id));
+    }
+
+    public function hapus_fotoPenghargaan($id)
+    {
+        $foto = $this->db->get_where($this->penghargaan, ['id' => $id])->row();
+        if ($foto->images != "01.jpg") {
+            $filename = explode(".", $foto->images)[0];
+            return array_map('unlink', glob(FCPATH . "/assets/img/image_penghargaan/$filename.*"));
+        }
+    }
+
+    public function save_jadwal_vaksinasi()
+    {
+        $post = $this->input->post();
+        $this->judul = $post['judul'];
+        $this->jenis_vaksin = $post['jenis_vaksin'];
+        $this->tanggal = $post['tanggal'];
+        $this->jam_mulai = $post['jam_mulai'];
+        $this->jam_selesai = $post['jam_selesai'];
+        $this->images = $this->upload_imagesVaksinasi();
+        $this->status = 1;
+        $this->db->insert($this->jadwal_vaksinasi, $this);
+    }
+
+    public function update_jadwal_vaksinasi()
+    {
+        $post = $this->input->post();
+        $this->id = $post['id'];
+        $this->judul = $post['judul'];
+        $this->jenis_vaksin = $post['jenis_vaksin'];
+        $this->tanggal = $post['tanggal'];
+        $this->jam_mulai = $post['jam_mulai'];
+        $this->jam_selesai = $post['jam_selesai'];
+        if (!empty($_FILES["images"]["name"])) {
+            $this->images = $this->upload_imagesVaksinasi();
+        } else {
+            $this->images = $post["old_images"];
+        }
+        $this->db->update($this->jadwal_vaksinasi, $this, ['id' => $post['id']]);
+    }
+
+    private function upload_imagesVaksinasi()
+    {
+        $config['upload_path']          = './assets/img/image_all/';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $nama_lengkap = $_FILES['images']['name'];
+        $config['file_name']            = $nama_lengkap;
+        $config['overwrite']            = true;
+        $config['max_size']             = 3024;
+
+        $this->upload->initialize($config);
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('images')) {
+            return $this->upload->data("file_name");
+        }
+        print_r($this->upload->display_errors());
+    }
+
+    public function delete_jadwal_vaksinasi($id)
+    {
+        $this->hapus_fotoVaksinasi($id);
+        return $this->db->delete($this->jadwal_vaksinasi, array("id" => $id));
+    }
+
+    public function hapus_fotoVaksinasi($id)
+    {
+        $foto = $this->db->get_where($this->jadwal_vaksinasi, ['id' => $id])->row();
+        if ($foto->images != "01.jpg") {
+            $filename = explode(".", $foto->images)[0];
+            return array_map('unlink', glob(FCPATH . "/assets/img/image_all/$filename.*"));
+        }
+    }
+
+    public function save_poliklinik()
+    {
+        $post = $this->input->post();
+        $this->nama_poli = $post['nama_poli'];
+        $this->jam_buka = $post['jam_buka'];
+        $this->jam_tutup = $post['jam_tutup'];
+        $this->db->insert($this->poli, $this);
+    }
+
+    public function update_poliklinik()
+    {
+        $post = $this->input->post();
+        $this->id = $post['id'];
+        $this->nama_poli = $post['nama_poli'];
+        $this->jam_buka = $post['jam_buka'];
+        $this->jam_tutup = $post['jam_tutup'];
+        $this->db->update($this->poli, $this, ['id' => $post['id']]);
+    }
+
 }

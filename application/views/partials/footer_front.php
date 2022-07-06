@@ -1,40 +1,51 @@
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="span4">
+            <div class="span3">
                 <div class="widget">
-                    <h5>Browse pages</h5>
+                    <h5>Menu pages</h5>
                     <ul class="regular">
-                        <li><a href="#">Work for us</a></li>
-                        <li><a href="#">Creative process</a></li>
-                        <li><a href="#">Case study</a></li>
-                        <li><a href="#">Scaffold awwards</a></li>
-                        <li><a href="#">Meet the team</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Pelayanan</a></li>
+                        <li><a href="#">Informasi</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Kontak</a></li>
+                        <li><a href="#">Daftar Online</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="span4">
+            <div class="span3">
                 <div class="widget">
-                    <h5>Recent blog posts</h5>
+                    <h5>Artikel Terbaru</h5>
                     <ul class="regular">
-                        <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                        <li><a href="#">Mea malis nominavi insolens ut</a></li>
-                        <li><a href="#">Minim timeam has no aperiri sanctus ei mea per pertinax</a></li>
-                        <li><a href="#">Te malorum dignissim eos quod sensibus</a></li>
+                        <?php foreach ($artikel as $view) { ?>
+                            <li><a href="<?= base_url('Front/full_page_artikel/' . $view->id) ?>"><?= $view->judul ?></a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
-            <div class="span4">
+            <div class="span3">
+                <div class="widget">
+                    <h5>Berita Terbaru</h5>
+                    <ul class="regular">
+                        <?php foreach ($berita as $view) { ?>
+                            <li><a href="<?= base_url('Front/full_page_artikel/' . $view->id) ?>"><?= $view->judul ?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="span3">
                 <div class="widget">
                     <!-- logo -->
                     <a class="brand logo" href="index.html">
-                        <img src="assets/img/logo-dark.png" alt="">
+                        <img src="<?= base_url() ?>assets/img/logo-klik-klinik.png" height="100" width="200" alt="">
                     </a>
                     <!-- end logo -->
                     <address>
-                        <strong>Registered Companyname, Inc.</strong><br>
-                        8895 Somename Ave, Suite 600<br>
-                        San Francisco, CA 94107<br>
+                        <strong>Klik Klinik</strong><br>
+                        Jl Darmokali No 67<br>
+                        Surabaya, Jawa Timur<br>
                         <abbr title="Phone">P:</abbr> (123) 456-7890
                     </address>
                 </div>
@@ -57,7 +68,7 @@
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Serenity
               -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        Designed by <a href="https://bootstrapmade.com/"> BootstrapMade</a> Website by Bikea Tech 2022
                     </div>
                 </div>
             </div>

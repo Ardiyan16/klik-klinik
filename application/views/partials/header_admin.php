@@ -96,7 +96,14 @@
                                     <a href="<?= base_url('Admin/berita') ?>"><i class="fa fa-newspaper-o"></i> Berita</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Admin/jadwal_dokter') ?>"><i class="fa fa-calendar"></i> Jadwal Dokter</a>
+                                    <a><i class="fa fa-calendar"></i> Jadwal<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Admin/jadwal_dokter') ?>"> Jadwal Dokter</a></li>
+                                        <li><a href="<?= base_url('Admin/jadwal_vaksinasi') ?>"> Jadwal Vaksinasi</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/poliklinik') ?>"><i class="fa fa-clinic-medical"></i> Poliklinik</a>
                                 </li>
                                 <li>
                                     <a href="<?= base_url('Admin/karir') ?>"><i class="fa fa-briefcase"></i> Karir</a>
@@ -105,7 +112,7 @@
                                     <a href="<?= base_url('Admin/partner') ?>"><i class="fa fa-handshake"></i> Partner Asuransi</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Admin/karir') ?>"><i class="fas fa-award"></i> Penghargaan</a>
+                                    <a href="<?= base_url('Admin/penghargaan') ?>"><i class="fas fa-award"></i> Penghargaan</a>
                                 </li>
                             </ul>
                         </div>

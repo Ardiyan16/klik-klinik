@@ -249,6 +249,120 @@ class Admin extends CI_Controller
     {
         $var['title'] = 'Admin | Penghargaan';
         $var['penghargaan'] = $this->admin->get_penghargaan();
-        $this->load->view('admin/penghargaan');
+        $var['view_images'] = $this->admin->get_penghargaan();
+        $this->load->view('admin/penghargaan', $var);
+    }
+
+    public function create_penghargaan()
+    {
+        $var['title'] = 'Admin | Tambah Penghargaan';
+        $this->load->view('admin/create_penghargaan', $var);
+    }
+
+    public function save_penghargaan()
+    {
+        $this->admin->save_penghargaan();
+        $this->session->set_flashdata('success_create', true);
+        redirect('Admin/penghargaan');
+    }
+
+    public function edit_penghargaan($id)
+    {
+        $var['title'] = 'Admin | Edit Penghargaan';
+        $var['edit'] = $this->db->get_where('penghargaan', ['id' => $id])->row();
+        $this->load->view('admin/edit_penghargaan', $var);
+    }
+
+    public function update_penghargaan()
+    {
+        $this->admin->update_penghargaan();
+        $this->session->set_flashdata('success_update', true);
+        redirect('Admin/penghargaan');
+    }
+
+    public function delete_penghargaan($id)
+    {
+        $this->admin->delete_penghargaan($id);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Admin/penghargaan');
+    }
+
+    public function jadwal_vaksinasi()
+    {
+        $var['title'] = 'Admin | Jadwal Vaksinasi';
+        $var['jadwal_vaksinasi'] = $this->admin->get_jadwal_vaksinasi();
+        $var['view'] = $this->admin->get_jadwal_vaksinasi();
+        $this->load->view('Admin/jadwal_vaksinasi', $var);
+    }
+
+    public function create_jadwal_vaksinasi()
+    {
+        
+        $var['title'] = 'Admin | Tambah Jadwal Vaksinasi';
+        $this->load->view('Admin/create_jadwalvaksinasi', $var);
+    }
+
+    public function save_jadwal_vaksinasi()
+    {
+        $this->admin->save_jadwal_vaksinasi();
+        $this->session->set_flashdata('success_create', true);
+        redirect('Admin/jadwal_vaksinasi');
+    }
+
+    public function vaksinasi_selesai($id)
+    {
+        $this->admin->vaksinasi_selesai($id);
+        $this->session->set_flashdata('success_vaksinasi_done', true);
+        redirect('Admin/jadwal_vaksinasi');
+    }
+
+    public function edit_jadwal_vaksinasi($id)
+    {
+        $var['title'] = 'Admin | Edit Jadwal Vaksinasi';
+        $var['edit'] = $this->db->get_where('jadwal_vaksinasi', ['id' => $id])->row();
+        $this->load->view('Admin/edit_jadwalvaksinasi', $var);
+    }
+
+    public function update_jadwal_vaksinasi()
+    {
+        $this->admin->update_jadwal_vaksinasi();
+        $this->session->set_flashdata('success_update', true);
+        redirect('Admin/jadwal_vaksinasi');
+    }
+
+    public function delete_jadwal_vaksinasi($id)
+    {
+        $this->admin->delete_jadwal_vaksinasi($id);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Admin/jadwal_vaksinasi');
+    }
+
+    public function poliklinik()
+    {
+        $var['title'] = 'Admin | Poliklinik';
+        $var['poliklinik'] = $this->admin->get_poli();
+        $var['poliklinik2'] = $this->admin->get_poli();
+        $this->load->view('admin/poliklinik', $var);
+    }
+
+    public function save_poliklinik()
+    {
+        $this->admin->save_poliklinik();
+        $this->session->set_flashdata('success_create', true);
+        redirect('Admin/poliklinik');
+    }
+
+    public function update_poliklinik()
+    {
+        $this->admin->update_poliklinik();
+        $this->session->set_flashdata('success_update', true);
+        redirect('Admin/poliklinik');
+    }
+
+    public function delete_poliklinik($id)
+    {
+        $this->db->delete('poliklinik', ['id' => $id]);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Admin/poliklinik');
     }
 }
