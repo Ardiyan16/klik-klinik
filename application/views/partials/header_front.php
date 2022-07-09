@@ -20,6 +20,8 @@
     <link href="<?= base_url() ?>assets/front/assets/css/style.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/front/assets/color/default.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- fav and touch icons
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
@@ -62,7 +64,7 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#">Pelayanan</a>
+                                    <a href="#">Layanan</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="<?= base_url('Front/layanan_medis') ?>">Layanan Medis</a></li>
                                         <li><a href="<?= base_url('Front/jadwal_dokter') ?>">Jadwal Dokter</a></li>

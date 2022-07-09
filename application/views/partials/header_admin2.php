@@ -114,6 +114,9 @@
                                 <li>
                                     <a href="<?= base_url('Admin/penghargaan') ?>"><i class="fas fa-award"></i> Penghargaan</a>
                                 </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/pesan_kontak') ?>"><i class="fas fa-envelope"></i> Pesan Kontak</a>
+                                </li>
                             </ul>
                         </div>
 

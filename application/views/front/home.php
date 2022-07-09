@@ -102,14 +102,14 @@
                     <div class="row">
                         <div class="span12">
                             <div class="tagline_text">
-                                <h2>Layanan Online Klik Klinik!</h2>
+                                <h2>Selamat Datang di Layanan Online Klik Klinik!</h2>
                                 <p>
                                     Klik Klinik menghadirkan pelayanan online untuk masyarakat.
                                 </p>
                             </div>
                             <div class="btn-toolbar cta">
                                 <a class="btn btn-large btn-color" href="<?= base_url('Auth/login') ?>">
-                                    <i class="icon-plane icon-white"></i> Pelayanan Online </a>
+                                    <i class="icon-signin icon-white"></i> Pelayanan Online </a>
                             </div>
                         </div>
                     </div>

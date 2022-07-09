@@ -91,6 +91,12 @@
 <script src="<?= base_url() ?>assets/front/assets/js/hover/jquery-hover-effect.js"></script>
 <script src="<?= base_url() ?>assets/front/assets/js/hover/setting.js"></script>
 
+<script src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyAFTimIhQoFCg8bF7PAMgDWi38QqqvaCx8"></script>
+
+<!-- Contact Form JavaScript File -->
+<script src="<?= base_url() ?>assets/front/contactform/contactform.js"></script>
+
+
 <!-- Template Custom JavaScript File -->
 <script src="<?= base_url() ?>assets/front/assets/js/custom.js"></script>
 

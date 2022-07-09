@@ -365,4 +365,18 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('success_delete', true);
         redirect('Admin/poliklinik');
     }
+
+    public function pesan_kontak()
+    {
+        $var['title'] = 'Admin | Pesan';
+        $var['pesan'] = $this->admin->get_pesan();
+        $this->load->view('admin/pesan_kontak', $var);
+    }
+
+    public function delete_pesan_kontak($id)
+    {
+        $this->db->delete('kontak', ['id' => $id]);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Admin/pesan_kontak');
+    }
 }

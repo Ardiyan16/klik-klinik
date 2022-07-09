@@ -55,24 +55,19 @@
                                 <p>
                                     <?= substr($view->deskripsi, strpos($view->deskripsi, ">") + 1, 200); ?>...
                                 </p>
-                                <a href="" class="btn btn-small btn-success" type="button">Selengkapnya</a>
+                                <a href="<?= base_url('Front/full_page_artikel/' . $view->id) ?>" class="btn btn-small btn-success" type="button">Selengkapnya</a>
                             </div>
                         </div>
                     </article>
                 <?php } ?>
                 <!-- end article 1 -->
 
-                <?php if ($pagination) : ?>
-                    <div class="card-footer">
-                        <?php echo $pagination; ?>
-                    </div>
-                <?php endif; ?>
-
+                <?php echo $this->pagination->create_links(); ?>
             </div>
             <div class="span4">
                 <aside>
                     <div class="widget">
-                        <h4>Artikel terbaru</h4>
+                        <h4>Berita terbaru</h4>
                         <ul class="recent-posts">
                             <?php foreach ($berita as $view) { ?>
                                 <li><a href="#"><?= $view->judul ?></a>

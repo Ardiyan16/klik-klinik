@@ -12,6 +12,7 @@ class M_admin extends CI_Model
     private $penghargaan = 'penghargaan';
     private $jadwal_vaksinasi = 'jadwal_vaksinasi';
     private $poli = 'poliklinik';
+    private $kontak = 'kontak';
 
     public function get_users()
     {
@@ -33,7 +34,7 @@ class M_admin extends CI_Model
 
     public function get_jadwal_dokter()
     {
-        $this->db->select('jadwal_dokter.*, auth.nama');
+        $this->db->select('jadwal_dokter.*, auth.nama, auth.picture');
         $this->db->from('jadwal_dokter');
         $this->db->join('auth', 'jadwal_dokter.id_dokter = auth.id');
         return $this->db->get()->result();
@@ -65,6 +66,11 @@ class M_admin extends CI_Model
     public function get_poli()
     {
         return $this->db->get($this->poli)->result();
+    }
+
+    public function get_pesan()
+    {
+        return $this->db->get($this->kontak)->result();
     }
 
     public function notifikasi_new_user()
