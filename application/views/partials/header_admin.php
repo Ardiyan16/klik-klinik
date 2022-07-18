@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
+    <script src="<?= base_url() ?>assets/back/sprintf.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
@@ -80,18 +81,28 @@
                                     <a href="<?= base_url('Admin') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran</a>
+                                    <a href="<?= base_url('Admin/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/pengobatan') ?>"><i class="fa fa-stethoscope"></i> Pengobatan</a>
                                 </li>
                                 <li>
                                     <a href="<?= base_url('Admin/konfirmasi_user') ?>"><i class="fa fa-check"></i> Konfirmasi User</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/konfirmasi_user') ?>"><i class="fa fa-history"></i> Riwayat Pengobatan</a>
+                                    <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Admin/riwayat_pendaftaran') ?>"> Riwayat Pendaftaran</a></li>
+                                        <li><a href="<?= base_url('Admin/riwayat_pengobatan') ?>"> Riwayat Pengobatan</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                             <br>
                             <h3>Menu Konten</h3>
                             <ul class="nav side-menu">
+                                <li>
+                                    <a href="<?= base_url('Admin/dokter') ?>"><i class="fa fa-user-md"></i> Dokter</a>
+                                </li>
                                 <li>
                                     <a href="<?= base_url('Admin/berita') ?>"><i class="fa fa-newspaper-o"></i> Berita</a>
                                 </li>

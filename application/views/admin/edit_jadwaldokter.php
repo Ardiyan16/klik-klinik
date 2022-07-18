@@ -26,7 +26,7 @@
                             <?php foreach ($dokter as $dok) { ?>
                                 <option <?php if ($edit->id_dokter == $dok->id) {
                                         echo "selected=\"selected\"";
-                                        } ?>value="<?= $dok->id ?>"><?= $dok->nama ?></option>
+                                        } ?> value="<?= $dok->id ?>"><?= $dok->nama ?></option>
                             <?php } ?>
                         </select>
                     </div>

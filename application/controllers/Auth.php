@@ -134,6 +134,7 @@ class Auth extends CI_Controller
         if ($nik == $user['nik']) {
             if (password_verify($password, $user['password'])) {
                 $data = [
+                    'id' => $user['id'],
                     'nik' => $user['nik'],
                     'email' => $user['email'],
                     'name' => $user['name'],
@@ -147,6 +148,7 @@ class Auth extends CI_Controller
                 if ($user['status'] == '1') {
                     redirect('User');
                 } else {
+                    $this->session->unset_userdata('id');
                     $this->session->unset_userdata('nik');
                     $this->session->unset_userdata('alamat');
                     $this->session->unset_userdata('email');
@@ -256,6 +258,7 @@ class Auth extends CI_Controller
 
     public function logout_user()
     {
+        $this->session->unset_userdata('id');
         $this->session->unset_userdata('nik');
         $this->session->unset_userdata('alamat');
         $this->session->unset_userdata('email');

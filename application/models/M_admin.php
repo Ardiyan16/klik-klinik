@@ -13,6 +13,8 @@ class M_admin extends CI_Model
     private $jadwal_vaksinasi = 'jadwal_vaksinasi';
     private $poli = 'poliklinik';
     private $kontak = 'kontak';
+    private $pendaftaran = 'pendaftaran';
+    private $dokter = 'dokter';
 
     public function get_users()
     {
@@ -73,22 +75,112 @@ class M_admin extends CI_Model
         return $this->db->get($this->kontak)->result();
     }
 
+    public function max_no_antri($id_poli)
+    {
+        $date = date('Y-m-d');
+        return $this->db->query("SELECT max(no_antrian) as maxs FROM pendaftaran WHERE tgl_pendaftaran = '$date' AND id_poli = '$id_poli' order by no_antrian desc limit 1")->row();
+    }
+
+    public function get_pendaftaran()
+    {
+        $this->db->select('pendaftaran.*, users.name, users.no_rekmed, poliklinik.nama_poli');
+        $this->db->from('pendaftaran');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->where('pendaftaran.status <', 3);
+        $this->db->order_by('id', 'desc');
+        return $this->db->get()->result();
+    }
+
+    public function riwayat_pendaftaran()
+    {
+        $this->db->select('pendaftaran.*, users.name, users.no_rekmed, poliklinik.nama_poli');
+        $this->db->from('pendaftaran');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->where('pendaftaran.status >', 2);
+        $this->db->order_by('id', 'desc');
+        return $this->db->get()->result();
+    }
+
+    public function detail_pendaftaran($id)
+    {
+        $this->db->select('pendaftaran.*, users.name, users.no_rekmed, poliklinik.nama_poli');
+        $this->db->from('pendaftaran');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->where('pendaftaran.id', $id);
+        return $this->db->get()->row();
+    }
+
     public function notifikasi_new_user()
     {
         $this->db->select('*');
         $this->db->from($this->users);
         $this->db->where('status', 0);
-        $this->db->order_by('nik', 'desc');
+        $this->db->order_by('id', 'desc');
         return $this->db->get()->result();
     }
 
     public function count_notif_user()
     {
-        $this->db->select('COUNT(nik) as jml');
+        $this->db->select('COUNT(id) as jml');
         $this->db->from($this->users);
         $this->db->where('status', 0);
-        $this->db->order_by('nik', 'desc');
+        $this->db->order_by('id', 'desc');
         return $this->db->get()->row()->jml;
+    }
+
+    public function notifikasi_new_pendaftaran()
+    {
+        $this->db->select('pendaftaran.*, poliklinik.nama_poli');
+        $this->db->from('pendaftaran');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->where('status', 0);
+        $this->db->order_by('id', 'desc');
+        return $this->db->get()->result();
+    }
+
+    public function count_notif_pendaftaran()
+    {
+        $this->db->select('COUNT(id) as jml');
+        $this->db->from('pendaftaran');
+        $this->db->where('status', 0);
+        $this->db->order_by('id', 'desc');
+        return $this->db->get()->row()->jml;
+    }
+
+    public function count_user_active()
+    {
+        $this->db->where('status', 1);
+        return $this->db->count_all_results('users');
+    }
+
+    public function count_user_offline()
+    {
+        $this->db->where('status', 2);
+        return $this->db->count_all_results('users');
+    }
+
+    public function get_pengobatan()
+    {
+        $this->db->select('*');
+        $this->db->from('pengobatan');
+        $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
+        $this->db->join('auth', 'pengobatan.id_dokter = auth.id');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->where('status_pengobatan <', 3);
+        $this->db->order_by('pengobatan.id', 'desc');
+        return $this->db->get()->result();
+    }
+
+    public function view_dokter()
+    {
+        $this->db->select('dokter.*, auth.nama, auth.picture, poliklinik.nama_poli');
+        $this->db->from($this->dokter);
+        $this->db->join('auth', 'dokter.id_dokter = auth.id');
+        $this->db->join('poliklinik', 'dokter.id_poli = poliklinik.id');
+        return $this->db->get()->result();
     }
 
     public function update_profile()
@@ -429,6 +521,113 @@ class M_admin extends CI_Model
         $this->jam_buka = $post['jam_buka'];
         $this->jam_tutup = $post['jam_tutup'];
         $this->db->update($this->poli, $this, ['id' => $post['id']]);
+    }
+
+    public function update_pendaftaran()
+    {
+
+        $post = $this->input->post();
+        $this->id = $post['id'];
+        $this->no_antrian = $post['no_antrian'];
+        date_default_timezone_set('Asia/Jakarta');
+        $this->jam = time();
+        $this->status = 1;
+        $this->db->update($this->pendaftaran, $this, ['id' => $post['id']]);
+    }
+
+    // var $barang = 'barang';
+    var $column_orderid = array('a.id, a.no_rekmed', 'a.name', 'a.tempat_lahir', 'a.tanggal_lahir', 'a.alamat', null); //set column field database for datatable orderable
+    var $column_searchid = array('a.id', 'a.no_rekmed', 'a.name', 'a.tempat_lahir', 'a.tanggal_lahir', 'a.alamat'); //set column field database for datatable searchable just title , author , category are searchable
+    var $orderid = array('a.id' => 'asc'); // default order
+
+    public function get_datatablesid()
+    {
+        $this->_get_datatables_queryid();
+        //	$this->db->where('orde_sungai',$id);
+
+        if ($_REQUEST['length'] != -1) {
+            $this->db->limit($_REQUEST['length'], $_REQUEST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    private function _get_datatables_queryid()
+    {
+        $this->db->select('*');
+        $this->db->from("users a");
+        $this->db->where('status', 2);
+        // $this->db->join('jenis c', 'a.id_jenis=c.id_jenis', 'left outer');
+        // $this->db->join('merek b', 'a.id_merek=b.id_merek', 'left outer');
+        $i = 0;
+
+
+        foreach ($this->column_searchid as $item) {
+            if ($_POST['search']['value']) // if datatable send POST for search
+            {
+
+                if ($i === 0) // first loop
+                {
+                    // $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                    $this->db->like($item, $_POST['search']['value']);
+                } else {
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+
+                if (count($this->column_searchid) - 1 == $i); //last loop
+                // $this->db->group_end(); //close bracket
+
+
+            }
+
+            $i++;
+        }
+
+        if (isset($_REQUEST['order'])) {
+            $this->db->order_by($this->column_orderid[$_REQUEST['order']['0']['column']], $_REQUEST['order']['0']['dir']);
+        } else if (isset($this->orderid)) {
+            $order = $this->orderid;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+
+    function count_filteredid()
+    {
+        $this->_get_datatables_queryid();
+        //$this->db->where('orde_sungai',$id);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    function count_allid()
+    {
+        $this->db->from('users');
+        $this->db->where('status', 2);
+        return $this->db->count_all_results();
+    }
+
+    public function save_pendaftaran()
+    {
+        $post = $this->input->post();
+        $this->kd_pendaftaran = $post['kd_pendaftaran'];
+        $this->id_users = $post['id_users'];
+        $this->id_poli = $post['id_poli'];
+        $this->tgl_pendaftaran = $post['tgl_pendaftaran'];
+        $this->no_antrian = $post['no_antrian'];
+        $this->gejala = $post['gejala'];
+        date_default_timezone_set('Asia/Jakarta');
+        $this->jam = time();
+        $this->status = 1;
+        $this->db->insert($this->pendaftaran, $this);
+    }
+
+    public function update_dokter()
+    {
+        $post = $this->input->post();
+        $this->id = $post['id'];
+        $this->id_dokter = $post['id_dokter'];
+        $this->id_poli = $post['id_poli'];
+        $this->db->update($this->dokter, $this, ['id' => $post['id']]);
     }
 
 }

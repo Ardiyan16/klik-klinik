@@ -80,18 +80,28 @@
                                     <a href="<?= base_url('Admin') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran</a>
+                                    <a href="<?= base_url('Admin/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Admin/pengobatan') ?>"><i class="fa fa-stethoscope"></i> Pengobatan</a>
                                 </li>
                                 <li>
                                     <a href="<?= base_url('Admin/konfirmasi_user') ?>"><i class="fa fa-check"></i> Konfirmasi User</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/konfirmasi_user') ?>"><i class="fa fa-history"></i> Riwayat Pengobatan</a>
+                                    <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Admin/riwayat_pendaftaran') ?>"> Riwayat Pendaftaran</a></li>
+                                        <li><a href="<?= base_url('Admin/riwayat_pengobatan') ?>"> Riwayat Pengobatan</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                             <br>
                             <h3>Menu Konten</h3>
                             <ul class="nav side-menu">
+                                <li>
+                                    <a href="<?= base_url('Admin/dokter') ?>"><i class="fa fa-user-md"></i> Dokter</a>
+                                </li>
                                 <li>
                                     <a href="<?= base_url('Admin/berita') ?>"><i class="fa fa-newspaper-o"></i> Berita</a>
                                 </li>
@@ -162,8 +172,9 @@
                             <li role="presentation" class="nav-item dropdown open">
                                 <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-bell-o"></i>
-                                    <?php if ($jml_notif > 0) { ?>
-                                        <span class="badge bg-green"><?= $jml_notif ?></span>
+                                    <?php $count_notif = $jml_notif + $jml_notif2; ?>
+                                    <?php if ($count_notif > 0) { ?>
+                                        <span class="badge bg-green"><?= $count_notif ?></span>
                                     <?php } ?>
                                 </a>
                                 <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
@@ -177,14 +188,24 @@
                                         </li>
                                         <hr>
                                     <?php } ?>
+                                    <?php foreach ($notif_new_pendaftaran as $notif) { ?>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="<?= base_url('Admin/pendaftaran') ?>">
+                                                <span class="message"><i class="fa fa-clinic-medical"></i>
+                                                    Pendaftaran pasien baru dari <?= $notif->nama_poli ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <hr>
+                                    <?php } ?>
                                     <li class="nav-item">
                                         <div class="text-center">
                                             <a class="dropdown-item">
-                                                <?php if ($jml_notif == 0) { ?>
+                                                <?php if ($count_notif == 0) { ?>
                                                     <strong>Tidak Ada Notifikasi</strong>
                                                 <?php }
-                                                if ($jml_notif > 0) { ?>
-                                                    <strong><?= $jml_notif ?> Notifikasi</strong>
+                                                if ($count_notif > 0) { ?>
+                                                    <strong><?= $count_notif ?> Notifikasi</strong>
                                                 <?php } ?>
                                             </a>
                                         </div>

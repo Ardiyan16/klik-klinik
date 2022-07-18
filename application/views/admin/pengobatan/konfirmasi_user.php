@@ -3,7 +3,7 @@
     <div class="page-title">
         <div class="title_left">
             <h3>Konfirmasi Users</h3>
-            <!-- <a href="<?= base_url('Admin/create_karir') ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Karir</a> -->
+            <a href="<?= base_url('Admin/create_users') ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Users/Pasien</a>
         </div>
     </div>
     <div class="col-md-12 col-sm-12 ">
@@ -50,7 +50,9 @@
                                                 if ($user->status == 1) {
                                                     echo "<span class='badge badge-success' style='color: white;'>Terverifikasi</span>";
                                                 }
-
+                                                if ($user->status == 2) {
+                                                    echo "<span class='badge badge-primary' style='color: white;'>Pasien Offline</span>";
+                                                }
                                                 ?>
                                             </td>
                                             <td>
@@ -160,10 +162,10 @@
             // timer: 1500
         })
 
-    <?php elseif ($this->session->flashdata('success_update')) : ?>
+    <?php elseif ($this->session->flashdata('success_add_user')) : ?>
         Swal.fire({
             icon: 'success',
-            title: 'Data berhasil di update!',
+            title: 'Data berhasil di simpan!',
             showConfirmButton: true,
             // timer: 1500
         })

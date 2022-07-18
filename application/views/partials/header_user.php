@@ -64,7 +64,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>user</h2>
+                            <h2>pengguna / pasien</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -77,16 +77,20 @@
                             <h3>Menu Pengobatan</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="<?= base_url('Admin') ?>"><i class="fa fa-user"></i> Profile</a>
+                                    <a href="<?= base_url('User') ?>"><i class="fa fa-user"></i> Profile</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran Online</a>
+                                    <a href="<?= base_url('User/pilih_layanan') ?>"><i class="fa fa-list"></i> Pendaftaran Online</a>
                                 </li>
-                                <!-- <li>
-                                    <a href="<?= base_url('Admin/konfirmasi_user') ?>"><i class="fa fa-check"></i> Cek</a>
-                                </li> -->
                                 <li>
-                                    <a href="<?= base_url('Owner/konfirmasi_user') ?>"><i class="fa fa-history"></i> Riwayat Pengobatan Anda</a>
+                                    <a href="<?= base_url('Admin/konsultasi') ?>"><i class="fa fa-handshake"></i> Konsultasi</a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('User/riwayat_pendaftaran') ?>"> Riwayat Pendaftaran</a></li>
+                                        <li><a href="<?= base_url('User/riwayat_pengobatan') ?>"> Riwayat Pengobatan</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                             <br>
@@ -130,6 +134,48 @@
                                     <a class="dropdown-item" href="<?= base_url('Admin/profile') ?>"> Profile</a>
                                     <a class="dropdown-item" href="#logout" data-toggle="modal"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
+                            </li>
+                            <li role="presentation" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-bell-o"></i>
+                                    <?php if ($count_notif > 0) { ?>
+                                        <span class="badge bg-green"><?= $count_notif ?></span>
+                                    <?php } ?>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <?php foreach ($notif_pendaftaran as $notif) { ?>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="<?php echo base_url("User/detail_pendaftaran2?id=" . $notif->id . "&id_pendaftaran=" . $notif->id_pendaftaran); ?>">
+                                                <span class="message"><i class="fa fa-clinic-medical"></i>
+                                                    <?= $notif->keterangan ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <hr>
+                                    <?php } ?>
+                                    <?php foreach ($notif_reject as $notif) { ?>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="<?= base_url("User/riwayat_pendaftaran?id_notif=". $notif->id ."") ?>">
+                                                <span class="message"><i class="fa fa-times"></i>
+                                                    Mohon maaf <?= $notif->keterangan ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <hr>
+                                    <?php } ?>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <?php if ($count_notif == 0) { ?>
+                                                    <strong>Tidak Ada Notifikasi</strong>
+                                                <?php }
+                                                if ($count_notif > 0) { ?>
+                                                    <strong><?= $count_notif ?> Notifikasi</strong>
+                                                <?php } ?>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </nav>

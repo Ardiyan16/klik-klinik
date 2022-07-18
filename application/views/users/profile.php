@@ -55,7 +55,7 @@
                                     <img class="img-responsive avatar-view" src="<?= base_url('assets/img/image_team/default_user.png') ?>" height="250" width="220" alt="Avatar" title="Foto Anda">
                                 </div>
                             </div>
-                            <h3><?= $profile->name ?></h3>
+                            <h3><?= $profile->name ?> <br>(Nomor Rekam Medis : <?= $profile->no_rekmed ?>)</h3>
 
                             <ul class="list-unstyled user_data">
                                 <li><i class="fa fa-map-marker user-profile-icon"></i> <?= $profile->tempat_lahir ?>
