@@ -29,6 +29,7 @@
                                         <th>No Rekam Medis</th>
                                         <th>Layanan</th>
                                         <th>Tanggal</th>
+                                        <th>Dokter</th>
                                         <th>Status</th>
                                         <th>Option</th>
                                     </tr>
@@ -43,6 +44,7 @@
                                             <td><?= $get->no_rekmed ?></td>
                                             <td><?= $get->nama_poli ?></td>
                                             <td><?= date('d-m-Y', strtotime($get->tgl_pendaftaran)) ?></td>
+                                            <td><?= $get->nama ?></td>
                                             <td><?php
                                                 if ($get->status == 0) {
                                                     echo "<span class='badge badge-secondary' style='color: white;'>Menunggu Konfirmasi</span>";
@@ -51,7 +53,7 @@
                                                     echo "<span class='badge badge-info' style='color: white;'>Telah Terkonfirmasi</span>";
                                                 }
                                                 if ($get->status == 2) {
-                                                    echo "<span class='badge badge-parimary' style='color: white;'>Pengobatan</span>";
+                                                    echo "<span class='badge badge-primary' style='color: white;'>Proses Pengobatan</span>";
                                                 }
                                                 if ($get->status == 3) {
                                                     echo "<span class='badge badge-success' style='color: white;'>Selesai</span>";

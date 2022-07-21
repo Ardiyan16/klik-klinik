@@ -53,6 +53,7 @@ class M_user extends CI_Model
         $this->id_poli = $post['id_poli'];
         $this->tgl_pendaftaran = $post['tgl_pendaftaran'];
         $this->gejala = $post['gejala'];
+        $this->id_dokter = 0;
         $this->status = 0;
         $this->db->insert($this->pendaftaran, $this);
     }

@@ -52,6 +52,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="control-label col-md-3 col-sm-3 ">Pilih Dokter</label>
+                        <div class="col-md-9 col-sm-9 ">
+                            <select name="id_dokter" class="form-control">
+                                <?php foreach ($list_dokter as $ld) { ?>
+                                    <option value="<?= $ld->id_dokter ?>"><?= $ld->nama ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="control-label col-md-3 col-sm-3 ">No Antrian</label>
                         <div class="col-md-9 col-sm-9 ">
                             <input type="text" class="form-control" readonly name="no_antrian" id="antrian" placeholder="Stamina...">
@@ -111,6 +121,5 @@
             }
         });
     });
-
 </script>
 <?php $this->load->view('partials/footer.php') ?>

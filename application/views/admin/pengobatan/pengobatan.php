@@ -4,13 +4,13 @@
     <div class="page-title">
         <div class="title_left">
             <h3>Pengobatan</h3>
-            <a href="<?= base_url('Admin/pilih_layanan') ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Pengobatan</a>
+            <a href="<?= base_url('Admin/create_pengobatan') ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Pengobatan</a>
         </div>
     </div>
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Tabel Data Pendaftaran</h2>
+                <h2>Tabel Data Pengobatan</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -46,26 +46,26 @@
                                             <td><?= $get->nama ?></td>
                                             <td><?= date('d-m-Y', strtotime($get->tgl_pengobatan)) ?></td>
                                             <td><?php
-                                                if ($get->status == 0) {
-                                                    echo "<span class='badge badge-secondary' style='color: white;'>Menunggu Konfirmasi</span>";
+                                                if ($get->status_pengobatan == 0) {
+                                                    echo "<span class='badge badge-secondary' style='color: white;'>Penanganan Dokter</span>";
                                                 }
-                                                if ($get->status == 1) {
-                                                    echo "<span class='badge badge-info' style='color: white;'>Telah Terkonfirmasi</span>";
+                                                if ($get->status_pengobatan == 1) {
+                                                    echo "<span class='badge badge-info' style='color: white;'>Pengambilan Obat</span>";
                                                 }
-                                                if ($get->status == 2) {
-                                                    echo "<span class='badge badge-parimary' style='color: white;'>Pengobatan</span>";
+                                                if ($get->status_pengobatan == 2) {
+                                                    echo "<span class='badge badge-parimary' style='color: white;'>Pembayaran</span>";
                                                 }
-                                                if ($get->status == 3) {
+                                                if ($get->status_pengobatan == 3) {
                                                     echo "<span class='badge badge-success' style='color: white;'>Selesai</span>";
                                                 }
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="#detail<?= $get->id ?>" data-toggle="modal" title="Detail Pendaftaran" class="badge bg-primary" style="color: white;"><i class="fa fa-eye"></i></a>
-                                                <?php if ($get->status == 0) { ?>
+                                                <a href="#detail<?= $get->id ?>" data-toggle="modal" title="Detail Data" class="badge bg-primary" style="color: white;"><i class="fa fa-eye"></i></a>
+                                                <!-- <?php if ($get->status_pengobatan == 0) { ?>
                                                     <a href="<?= base_url("Admin/konfirmasi_pendaftaran?id=" . $get->id . "&id_poli=" . $get->id_poli) ?>" title="konfirmasi" class="badge bg-success" style="color: white;"><i class="fa fa-check"></i></a>
                                                     <a href="#reject<?= $get->id ?>" data-toggle="modal" title="reject" class="badge bg-danger" style="color: white;"><i class="fa fa-times"></i></a>
-                                                <?php } ?>
+                                                <?php } ?> -->
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -79,12 +79,12 @@
     </div>
 </div>
 <!-- Modal -->
-<!-- <?php foreach ($detail as $view) { ?>
+<?php foreach ($detail as $view) { ?>
     <div class="modal fade" id="detail<?= $view->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detail Pasien <?= $view->name ?></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Pengobatan <?= $view->kd_pendaftaran ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -92,6 +92,8 @@
                 <div class="modal-body">
                     <p>No Antrian = <?= $view->no_antrian ?></p>
                     <p>Gejala = <?= $view->gejala ?></p>
+                    <p>Diagnosa = <?= $view->diagnosa ?></p>
+                    <p>Keterangan = <?= $view->keterangan ?></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
@@ -100,12 +102,12 @@
             </div>
         </div>
     </div>
-<?php } ?> -->
+<?php } ?>
 <script>
-    <?php if ($this->session->flashdata('success_konfirmasi')) : ?>
+    <?php if ($this->session->flashdata('success_create')) : ?>
         Swal.fire({
             icon: 'success',
-            title: 'Pendaftaran berhasil dikonfirmasi!',
+            title: 'Data pengobatan berhasil disimpan!',
             showConfirmButton: true,
             // timer: 1500
         })

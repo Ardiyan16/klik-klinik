@@ -79,6 +79,7 @@ class Admin extends CI_Controller
         $id = $this->input->get('id');
         $id_poli = $this->input->get('id_poli');
         $var['view'] = $this->admin->detail_pendaftaran($id);
+        $var['list_dokter'] = $this->admin->list_dokter($id_poli);
         // $this->admin->max_no_antri('admin')
         $this->load->view('admin/pengobatan/konfirmasi_pendaftaran', $var);
     }
@@ -143,6 +144,7 @@ class Admin extends CI_Controller
     {
         $var['title'] = 'Admin | Pendaftaran Offline';
         $var['view'] = $this->db->get_where('poliklinik', ['id' => $id])->row();
+        $var['list_dokter'] = $this->admin->list_dokter($id);
         $this->load->view('admin/pengobatan/pendaftaran_offline', $var);
     }
 
@@ -180,11 +182,16 @@ class Admin extends CI_Controller
 
     public function save_pendaftaran()
     {
-        $this->admin->save_pendaftaran();
-        $this->session->set_flashdata('success_daftar', true);
-        redirect('Admin/pendaftaran');
+        $id = $this->input->post('id_poli');
+        $this->form_validation->set_rules('id_users', 'Id Users', 'required|trim', ['required' => 'anda belum menginputkan pasien']);
+        if ($this->form_validation->run() == false) {
+            $this->pendaftaran_offline($id);
+        } else {
+            $this->admin->save_pendaftaran();
+            $this->session->set_flashdata('success_daftar', true);
+            redirect('Admin/pendaftaran');
+        }
     }
-
 
     public function create_users()
     {
@@ -202,21 +209,21 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('no_telp', 'No Telp', 'max_length[13]|numeric', ['max_length' => 'no telepon tidak lebih dari 13 karakter', 'numeric' => 'no telepon harus angka']);
         if ($this->form_validation->run() == false) {
             $this->create_users();
-        } else { 
+        } else {
             $users = array(
-            'nik' => $this->input->post('nik'),
-            'no_rekmed' => $this->input->post('no_rekmed'),
-            'name' => $this->input->post('name'),
-            'tempat_lahir' => $this->input->post('tempat_lahir'),
-            'tgl_lahir' => $this->input->post('tgl_lahir'),
-            'alamat' => $this->input->post('alamat'),
-            'no_telp' => $this->input->post('no_telp'),
-            'status' => 2,
-        );
+                'nik' => $this->input->post('nik'),
+                'no_rekmed' => $this->input->post('no_rekmed'),
+                'name' => $this->input->post('name'),
+                'tempat_lahir' => $this->input->post('tempat_lahir'),
+                'tgl_lahir' => $this->input->post('tgl_lahir'),
+                'alamat' => $this->input->post('alamat'),
+                'no_telp' => $this->input->post('no_telp'),
+                'status' => 2,
+            );
 
-        $this->db->insert('users', $users);
-        $this->session->set_flashdata('success_add_user', true);
-        redirect('Admin/konfirmasi_user');
+            $this->db->insert('users', $users);
+            $this->session->set_flashdata('success_add_user', true);
+            redirect('Admin/konfirmasi_user');
         }
     }
 
@@ -232,7 +239,68 @@ class Admin extends CI_Controller
     {
         $var['title'] = 'Admin | Pengobatan';
         $var['pengobatan'] = $this->admin->get_pengobatan();
+        $var['detail'] = $this->admin->get_pengobatan();
         $this->load->view('admin/pengobatan/pengobatan', $var);
+    }
+
+    public function create_pengobatan()
+    {
+        $var['title'] = 'Admin | Pengobatan';
+        $this->load->view('admin/pengobatan/create_pengobatan', $var);
+    }
+
+    public function data_pendaftaran()
+    {
+        $list = $this->admin->get_data_pendaftaran();
+        // print_r($this->db->last_query());
+        $data = array();
+        $no = $_REQUEST['start'];
+        foreach ($list as $pendaftaran) {
+            // $kode_barang = preg_replace ('/[^\p{L}\p{N}]/u', '', $pasien->kode_barang);
+            // $nama_barang = preg_replace ('/[^\p{L}\p{N}]/u', '', $pasien->nama_barang);
+
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $pendaftaran->kd_pendaftaran;
+            $row[] = $pendaftaran->name;
+            $row[] = $pendaftaran->nama_poli;
+            $row[] = $pendaftaran->no_antrian;
+
+            $row[] = ' <button type="button" class="btn btn-primary "onclick="pencarian_kode(\'' . $pendaftaran->id . '\',\'' . $pendaftaran->kd_pendaftaran . '\',\'' . $pendaftaran->id_dokter . '\',\'' . $pendaftaran->no_rekmed . '\',\'' . $pendaftaran->name . '\',\'' . $pendaftaran->nama_poli . '\',\'' . $pendaftaran->no_antrian . '\',\'' . $pendaftaran->gejala . '\')">Pilih</button>';
+
+
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_REQUEST['draw'],
+            "recordsTotal" => $this->admin->jml_allid(),
+            "recordsFiltered" => $this->admin->jml_filteredid(),
+            "data" => $data,
+        );
+        echo json_encode($output);
+    }
+
+    public function save_pengobatan()
+    {
+        $this->admin->save_pengobatan();
+        $id_pendaftaran = $this->input->post('id');
+        if (!empty($id_pendaftaran)) {
+            $this->db->set('status', 2);
+            $this->db->where('id', $id_pendaftaran);
+            $this->db->update('pendaftaran');
+        }
+        $lastid = $this->admin->get_lastid();
+        // var_dump($lastid);
+        $notif = array(
+            'id_pengobatan' => $lastid[0]->id,
+            'id_auth' => $this->input->post('id_dokter'),
+            'keterangan' => 'Dokter, anda mempunyai pasien baru',
+            'status' => 0,
+        );
+        $this->db->insert('notifikasi_pengobatan', $notif);
+        $this->session->set_flashdata('success_create', true);
+        redirect('Admin/pengobatan');
     }
 
     public function profile()

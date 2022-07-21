@@ -32,10 +32,10 @@
                     <input type="text" name="kd_pendaftaran" value="KK-<?= $date ?>-<?= $no_random ?>" placeholder="Judul..." readonly class="form-control">
                     <br>
                     <label>Nama Pasien</label>
-                    <input type="text" name="name" placeholder="Nama Pasien..." class="form-control nama" readonly>
+                    <input type="text" name="name" placeholder="Nama Pasien..." required class="form-control nama" readonly>
                     <br>
                     <label>No Rekam Medis</label>
-                    <input type="text" name="no_rekmed" placeholder="No Rekam Medis..." readonly class="form-control no_rekmed">
+                    <input type="text" name="no_rekmed" placeholder="No Rekam Medis..." required readonly class="form-control no_rekmed">
                     <br>
                     <label>Poli Dipilih</label>
                     <input type="text" value="<?= $view->nama_poli ?>" readonly name="tag" placeholder="Tag..." class="form-control">
@@ -48,9 +48,19 @@
                     <label class="control-label col-md-3 col-sm-3 ">No Antrian</label>
                     <input type="text" class="form-control" readonly name="no_antrian" id="antrian" placeholder="">
                     <br>
+                    <div class="form-group row">
+                        <label>Pilih Dokter</label>
+                        <select name="id_dokter" class="form-control">
+                            <?php foreach ($list_dokter as $ld) { ?>
+                                <option value="<?= $ld->id_dokter ?>"><?= $ld->nama ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <br>
                     <label>Gejala</label>
                     <textarea name="gejala" class="form-control mb-3" rows="3"></textarea>
                     <br>
+                    <?php echo form_error('id_users', '<small style="color: red;" class="text-danger pl-3">', '</small>'); ?>
                     <div class="ln_solid"></div>
                     <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 </form>
