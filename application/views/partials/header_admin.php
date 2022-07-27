@@ -81,13 +81,13 @@
                                     <a href="<?= base_url('Admin') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
                                 </li>
                                 <li>
+                                    <a href="<?= base_url('Admin/konfirmasi_user') ?>"><i class="fa fa-check"></i> Konfirmasi User</a>
+                                </li>
+                                <li>
                                     <a href="<?= base_url('Admin/pendaftaran') ?>"><i class="fa fa-list"></i> Pendaftaran</a>
                                 </li>
                                 <li>
                                     <a href="<?= base_url('Admin/pengobatan') ?>"><i class="fa fa-stethoscope"></i> Pengobatan</a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url('Admin/konfirmasi_user') ?>"><i class="fa fa-check"></i> Konfirmasi User</a>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>

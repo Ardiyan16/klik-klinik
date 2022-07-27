@@ -1,4 +1,4 @@
-<?php $this->load->view('partials/header_apoteker.php') ?>
+<?php $this->load->view('partials/header_kasir.php') ?>
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="row">
@@ -36,7 +36,7 @@
             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
                 <div class="tile-stats">
                     <div class="icon"><i class="fa fa-shopping-cart"></i></div>
-                    <div class="count"><?= $jml_transaksi ?></div>
+                    <div class="count">1</div>
                     <h3>Transaksi Obat</h3>
                     <p>Jumlah transaksi obat</p>
                 </div>
@@ -44,7 +44,7 @@
             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
                 <div class="tile-stats">
                     <div class="icon"><i class="fa fa-pills"></i></div>
-                    <div class="count"><?= $jml_obat ?></div>
+                    <div class="count">1</div>
                     <h3>Jumlah Obat</h3>
                     <p>Jumlah keseluruhan obat</p>
                 </div>
@@ -52,7 +52,7 @@
             <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
                 <div class="tile-stats">
                     <div class="icon"><i class="fa fa-warning"></i></div>
-                    <div class="count"><?= $jml_alert_stok + $jml_alert_kadaluarsa ?></div>
+                    <div class="count">1</div>
                     <h3>Jumlah Pengingat</h3>
                     <p>pengingat stok obat dan obat kadaluarsa</p>
                 </div>
@@ -67,27 +67,6 @@
             </div> -->
         </div>
     </div>
-    <div class="row">
-        <?php foreach ($alert_stok as $alert) { ?>
-            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                <strong><i class="fa fa-info-circle"></i> Informasi!</strong> Obat dengan kode <?= $alert->kd_obat ?> dan nama <?= $alert->nama_obat ?> tersisa <?= $alert->stok ?> stok.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php } ?>
-    </div>
-    <div class="row">
-        <?php foreach ($alert_kadaluarsa as $alert) { ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong><i class="fa fa-info-circle"></i> Informasi!</strong> Obat dengan kode <?= $alert->kd_obat ?> dan nama <?= $alert->nama_obat ?> telah kadaluarsa pada <?= $alert->tgl_kadaluarsa ?>.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php } ?>
-    </div>
-
     <!-- /top tiles -->
 </div>
 <?php $this->load->view('partials/footer.php') ?>

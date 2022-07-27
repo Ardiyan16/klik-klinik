@@ -718,7 +718,7 @@ class M_admin extends CI_Model
 
     function jml_filteredid()
     {
-        $this->_get_datatables_queryid();
+        $this->get_query_pendaftaran();
         //$this->db->where('orde_sungai',$id);
         $query = $this->db->get();
         return $query->num_rows();

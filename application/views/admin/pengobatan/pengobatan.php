@@ -53,7 +53,7 @@
                                                     echo "<span class='badge badge-info' style='color: white;'>Pengambilan Obat</span>";
                                                 }
                                                 if ($get->status_pengobatan == 2) {
-                                                    echo "<span class='badge badge-parimary' style='color: white;'>Pembayaran</span>";
+                                                    echo "<span class='badge badge-primary' style='color: white;'>Pembayaran</span>";
                                                 }
                                                 if ($get->status_pengobatan == 3) {
                                                     echo "<span class='badge badge-success' style='color: white;'>Selesai</span>";

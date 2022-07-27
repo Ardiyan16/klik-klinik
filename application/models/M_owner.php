@@ -6,6 +6,7 @@ class M_owner extends CI_Model
     private $auth = 'auth';
     private $role = 'role';
     private $visimisi = 'visi_misi';
+    private $tarif_layanan = 'tarif';
 
     public function get_team()
     {
@@ -28,6 +29,14 @@ class M_owner extends CI_Model
     public function get_visimisi()
     {
         return $this->db->get($this->visimisi)->row();
+    }
+
+    public function get_tarif()
+    {
+        $this->db->select('tarif.*, poliklinik.nama_poli');
+        $this->db->from('tarif');
+        $this->db->join('poliklinik', 'tarif.id_poli = poliklinik.id');
+        return $this->db->get()->result();
     }
 
     public function save_team()
@@ -93,6 +102,25 @@ class M_owner extends CI_Model
         $this->misi = $post['misi'];
         $this->motto = $post['motto'];
         $this->db->update($this->visimisi, $this, ['id' => 1]);
+    }
+
+    public function save_tarif()
+    {
+        $post = $this->input->post();
+        $this->id_poli = $post['id_poli'];
+        $this->diagnosa = $post['diagnosa'];
+        $this->tarif = str_replace(",", "", $post['tarif']);
+        $this->db->insert($this->tarif_layanan, $this);
+    }
+
+    public function update_tarif()
+    {
+        $post = $this->input->post();
+        $this->id = $post['id'];
+        $this->id_poli = $post['id_poli'];
+        $this->diagnosa = $post['diagnosa'];
+        $this->tarif = str_replace(",", "", $post['tarif']);
+        $this->db->update($this->tarif_layanan, $this, ['id' => $post['id']]);
     }
 
 }

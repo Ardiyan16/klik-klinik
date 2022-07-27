@@ -78,7 +78,7 @@
                     <input type="text" name="diagnosa" placeholder="Diagnosa Penyakit..." required class="form-control">
                     <br>
                     <label>Resep Obat</label>
-                    <textarea id="summernote" required name="resep" rows="12"></textarea>
+                    <textarea class="form-control mb-3" required name="resep" rows="3"></textarea>
                     <br>
                     <label>Keterangan</label>
                     <textarea class="form-control mb-3" name="keterangan" rows="3"></textarea>

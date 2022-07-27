@@ -3,14 +3,14 @@
 <div class="right_col" role="main">
     <div class="page-title">
         <div class="title_left">
-            <h3>Tambah Obat</h3>
+            <h3>Edit Obat</h3>
             <a href="<?= base_url('Apoteker/data_obat') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
         </div>
     </div>
     <div class="col-md-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>From Tambah Obat</h2>
+                <h2>From Edit Obat</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -19,25 +19,23 @@
             </div>
             <div class="x_content">
                 <br />
-                <form class="form-horizontal form-label-left" method="post" action="<?= base_url('Apoteker/save_obat') ?>" enctype="multipart/form-data">
+                <form class="form-horizontal form-label-left" method="post" action="<?= base_url('Apoteker/update_obat') ?>" enctype="multipart/form-data">
                     <label>Kode Obat</label>
-                    <input type="text" name="kd_obat" placeholder="Kode Obat..." required class="form-control">
+                    <input type="hidden" name="id" value="<?= $edit->id ?>">
+                    <input type="text" name="kd_obat" value="<?= $edit->kd_obat ?>" placeholder="Kode Obat..." required class="form-control">
                     <br>
                     <label>Nama Obat</label>
-                    <input type="text" name="nama_obat" placeholder="Nama Obat..." required class="form-control">
+                    <input type="text" name="nama_obat" value="<?= $edit->nama_obat ?>" placeholder="Nama Obat..." required class="form-control">
                     <br>
                     <label>Harga</label>
-                    <input type="text" name="harga" id="currency-field" value="" data-type="currency" placeholder="Harga..." required class="form-control">
-                    <br>
-                    <label>Stok</label>
-                    <input type="number" name="stok" placeholder="Stok..." required class="form-control">
+                    <input type="text" name="harga" id="currency-field" value="<?= $edit->harga ?>" data-type="currency" placeholder="Harga..." required class="form-control">
                     <br>
                     <label>Dosis</label>
-                    <textarea class="form-control mb-3" name="dosis" rows="3"></textarea>
+                    <textarea class="form-control mb-3" name="dosis" rows="3"><?= $edit->dosis ?></textarea>
                     <br>
                     <label>Tanggal Kadaluarsa</label>
                     <br>
-                    <input type="date" name="tgl_kadaluarsa" class="form-control col-md-3">
+                    <input type="date" name="tgl_kadaluarsa" value="<?= $edit->tgl_kadaluarsa ?>" class="form-control col-md-3">
                     <br>
                     <br>
                     <div class="ln_solid"></div>

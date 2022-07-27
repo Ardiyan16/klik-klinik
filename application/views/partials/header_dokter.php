@@ -42,6 +42,7 @@
 
     <link rel="stylesheet" href="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="<?= base_url() ?>assets/back/sprintf.js"></script>
     <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>

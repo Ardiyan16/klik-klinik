@@ -29,6 +29,9 @@
                     <label>Harga</label>
                     <input type="text" name="harga" id="currency-field" value="" data-type="currency" placeholder="Harga..." required class="form-control">
                     <br>
+                    <label>Stok</label>
+                    <input type="number" name="stok" placeholder="Stok..." required class="form-control">
+                    <br>
                     <label>Dosis</label>
                     <textarea class="form-control mb-3" name="dosis" rows="3"></textarea>
                     <br>

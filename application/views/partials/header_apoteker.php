@@ -42,7 +42,9 @@
 
     <link rel="stylesheet" href="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="<?= base_url() ?>assets/back/sprintf.js"></script>
     <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
@@ -83,13 +85,17 @@
                                     <a href="<?= base_url('Apoteker/data_obat') ?>"><i class="fa fa-pills"></i> Data Obat</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Apoteker/pengobatan') ?>"><i class="fa fa-file"></i> Data Resep</a>
+                                    <a href="<?= base_url('Apoteker/resep') ?>"><i class="fa fa-file"></i> Data Resep</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Apoteker/konsultasi') ?>"><i class="fa fa-shopping-cart"></i> Transaksi Obat</a>
+                                    <a href="<?= base_url('Apoteker/transaksi_non_pasien') ?>"><i class="fa fa-shopping-cart"></i> Transaksi Non Pasien</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Apoteker/riwayat_transaksi') ?>"><i class="fa fa-history"></i> Riwayat Transaksi</a>
+                                    <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Apoteker/riwayat_transaksi') ?>"> Riwayat Transaksi Pasien</a></li>
+                                        <li><a href="<?= base_url('Apoteker/riwayat_transaksi_nonPasien') ?>"> Riwayat Transaksi Non Pasien</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                             <br>
@@ -144,7 +150,7 @@
                                 <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                                     <?php foreach ($notif_resep as $notif) { ?>
                                         <li class="nav-item">
-                                            <a class="dropdown-item" href="<?php echo base_url("Apoteker/detail_resep/" . $notif->id); ?>">
+                                            <a class="dropdown-item" href="<?php echo base_url("Apoteker/transaksi_pasien/" . $notif->id); ?>">
                                                 <span class="message"><i class="fa fa-pills"></i>
                                                     Anda memperoleh resep baru dari dokter, silahkan di proses
                                                 </span>

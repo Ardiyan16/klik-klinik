@@ -8,6 +8,7 @@ class Owner extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_owner', 'owner');
+        $this->load->model('M_admin', 'admin');
         $this->load->library('form_validation');
     }
 
@@ -93,5 +94,46 @@ class Owner extends CI_Controller
         $this->owner->update_visimisi();
         $this->session->set_flashdata('success_update', true);
         redirect('Owner/visi_misi');
+    }
+
+    public function tarif_pelayanan()
+    {
+        $var['title'] = 'Owner | Tarif Pelayanan';
+        $var['tarif_pelayanan'] = $this->owner->get_tarif();
+        $var['poli'] = $this->admin->get_poli();
+        $this->load->view('owner/tarif_pelayanan', $var);
+    }
+
+    public function save_tarif()
+    {
+        $id_poli = $this->input->post('id_poli');
+        if (!empty($id_poli)) {
+            $this->owner->save_tarif();
+            $this->session->set_flashdata('success_create', true);
+            redirect('Owner/tarif_pelayanan');
+        } else {
+            $this->session->set_flashdata('failed_create', true);
+            redirect('Owner/tarif_pelayanan');
+        }
+    }
+
+    public function update_tarif()
+    {
+        $id_poli = $this->input->post('id_poli');
+        if (!empty($id_poli)) {
+            $this->owner->update_tarif();
+            $this->session->set_flashdata('success_update', true);
+            redirect('Owner/tarif_pelayanan');
+        } else {
+            $this->session->set_flashdata('failed_update', true);
+            redirect('Owner/tarif_pelayanan');
+        }
+    }
+
+    public function delete_tarif_pelayanan($id)
+    {
+        $this->db->delete('tarif', ['id' => $id]);
+        $this->session->set_flashdata('success_delete', true);
+        redirect('Owner/tarif_pelayanan');
     }
 }

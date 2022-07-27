@@ -34,10 +34,15 @@
     <link href="<?= base_url() ?>assets/back/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/back/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap Colorpicker -->
+    <link href="<?= base_url() ?>assets/back/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
     <!-- Custom Theme Style -->
     <link href="<?= base_url() ?>assets/back/build/css/custom.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.css">
 
+    <link rel="stylesheet" href="<?= base_url() ?>assets/back/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="<?= base_url() ?>assets/back/sprintf.js"></script>
     <script src="<?= base_url() ?>assets/back/sweetalert2-all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
@@ -60,7 +65,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2><?= $this->session->userdata('username') ?></h2>
+                            <h2>Dokter</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -70,24 +75,27 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>Menu</h3>
+                            <h3>Menu Dokter</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="<?= base_url('Owner') ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+                                    <a href="<?= base_url('Kasir') ?>"><i class="fa fa-home"></i> Dashboard</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/team') ?>"><i class="fa fa-users"></i> team</a>
+                                    <a><i class="fa fa-money"></i> Payment<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Kasir/payment_pasien') ?>"> Payment Pasien</a></li>
+                                        <li><a href="<?= base_url('Kasir/payment_nonPasien') ?>"> Payment Non Pasien</a></li>
+                                    </ul>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('Owner/visi_misi') ?>"><i class="fa fa-file"></i> Visi & Misi</a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url('Owner/tarif_pelayanan') ?>"><i class="fa fa-list"></i> Tarif Pelayanan</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa fa-book"></i> Pembukuan</a>
+                                    <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Apoteker/riwayat_transaksi') ?>"> Riwayat Pembayaran Pasien</a></li>
+                                        <li><a href="<?= base_url('Apoteker/riwayat_transaksi_nonPasien') ?>"> Riwayat Pembayaran Non Pasien</a></li>
+                                    </ul>
                                 </li>
                             </ul>
+                            <br>
                         </div>
 
                     </div>
@@ -101,8 +109,8 @@
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen">
                             <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        <a data-toggle="tooltip" data-placement="top" title="Profile">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="modal" data-placement="top" title="Logout" href="#logout">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
@@ -125,8 +133,51 @@
                                     <img src="<?= base_url('assets/img/image_team/' . $this->session->userdata('picture')) ?>" alt=""><?= $this->session->userdata('nama') ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="<?= base_url('Kasir/profile') ?>"> Profile</a>
                                     <a class="dropdown-item" href="#logout" data-toggle="modal"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
+                            </li>
+                            <li role="presentation" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-bell-o"></i>
+                                    <?php if ($count_notif > 0) { ?>
+                                        <span class="badge bg-green"><?= $count_notif ?></span>
+                                    <?php } ?>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <?php foreach ($notif_pasien as $notif) { ?>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="<?php echo base_url("Dokter/detail_pengobatan?id=" . $notif->id . "&id_notif=" . $notif->kode_trans); ?>">
+                                                <span class="message"><i class="fa fa-money"></i>
+                                                    <?= $notif->keterangan ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <hr>
+                                    <?php } ?>
+                                    <?php foreach ($notif_nonPasien as $notif) { ?>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="<?php echo base_url("Dokter/detail_pengobatan?id=" . $notif->id . "&id_notif=" . $notif->kode_trans); ?>">
+                                                <span class="message"><i class="fa fa-money"></i>
+                                                    <?= $notif->keterangan ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <hr>
+                                    <?php } ?>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <?php if ($count_notif == 0) { ?>
+                                                    <strong>Tidak Ada Notifikasi</strong>
+                                                <?php }
+                                                if ($count_notif > 0) { ?>
+                                                    <strong><?= $count_notif ?> Notifikasi</strong>
+                                                <?php } ?>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </nav>
