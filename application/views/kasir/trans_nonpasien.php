@@ -1,16 +1,16 @@
-<?php $this->load->view('partials/header_apoteker.php') ?>
+<?php $this->load->view('partials/header_kasir.php') ?>
 
 <div class="right_col" role="main">
     <div class="page-title">
         <div class="title_left">
-            <h3>Riwayat Transaksi Non Pasien</h3>
+            <h3>Transaksi Non Pasien</h3>
             <!-- <a href="<?= base_url('Apoteker/create_obat') ?>" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Obat</a> -->
         </div>
     </div>
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Tabel Riwayat Transaksi Non Pasien</h2>
+                <h2>Tabel Transaksi Non Pasien</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -34,21 +34,18 @@
                                 </thead>
                                 <tbody>
                                     <?php $no = 1;
-                                    foreach ($riwayat_transaksi as $show) {
-                                        if ($show->id_resep  == null) {
-                                    ?>
+                                    foreach ($riwayat_transaksi as $show) { ?>
                                             <tr>
                                                 <td><?= $no++ ?></td>
                                                 <td><?= $show->kd_trans ?></td>
                                                 <td><?= date('d-m-Y', strtotime($show->tgl_trans)) ?></td>
-                                                <td><?= $show->apoteker ?></td>
+                                                <td><?= $show->nama ?></td>
                                                 <td><?= 'Rp. ' . number_format($show->total_biaya) ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('Apoteker/detail_transaksi/' . $show->kd_trans) ?>" title="Detail Transaksi" class="badge bg-primary" style="color: white;"><i class="fa fa-list"></i></a>
+                                                    <a href="<?= base_url('Kasir/proses_payment_nonPasien/' . $show->kd_trans) ?>" title="Konfirmasi Pembayaran" class="badge bg-success" style="color: white;"><i class="fa fa-money"></i></a>
                                                 </td>
                                             </tr>
-                                    <?php }
-                                    } ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -58,14 +55,4 @@
         </div>
     </div>
 </div>
-<script>
-    <?php if ($this->session->flashdata('transaksi_berhasil')) : ?>
-        Swal.fire({
-            icon: 'success',
-            title: 'Transaksi berhasil, Data telah tersimpan!',
-            showConfirmButton: true,
-            // timer: 1500
-        })
-    <?php endif ?>
-</script>
 <?php $this->load->view('partials/footer.php') ?>

@@ -53,7 +53,7 @@
                                                     echo "<span class='badge badge-info' style='color: white;'>Pengambilan Obat</span>";
                                                 }
                                                 if ($show->status_pengobatan == 2) {
-                                                    echo "<span class='badge badge-parimary' style='color: white;'>Pembayaran</span>";
+                                                    echo "<span class='badge badge-primary' style='color: white;'>Pembayaran</span>";
                                                 }
                                                 if ($show->status_pengobatan == 3) {
                                                     echo "<span class='badge badge-success' style='color: white;'>Selesai</span>";
@@ -61,10 +61,9 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="<?php echo base_url("Dokter/detail_pengobatan?id=" . $show->id); ?>" title="Detail Data" class="badge bg-primary" style="color: white;"><i class="fa fa-eye"></i></a>
-                                                <!-- <?php if ($show->status_pengobatan == 0) { ?>
-                                                    <a href="<?= base_url("Admin/diagnosa_pasien?id=" . $show->id . "&id_poli=" . $show->id_poli) ?>" title="diagnosa pasien" class="badge bg-success" style="color: white;"><i class="fa fa-medkit"></i></a>
-                                                <?php } ?> -->
+                                            <?php if ($show->status_pengobatan == 0) { ?>
+                                                <a href="<?php echo base_url("Dokter/detail_pengobatan?id=" . $show->id); ?>" title="Detail Pengobatan" class="badge bg-success" style="color: white;"><i class="fa fa-medkit"></i></a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>

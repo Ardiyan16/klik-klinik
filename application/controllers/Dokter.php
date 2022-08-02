@@ -57,6 +57,7 @@ class Dokter extends CI_Controller
         $var['view'] = $this->dokter->detail_pengobatan($id);
         $var['notif_pengobatan'] = $this->dokter->notifikasi_pengobatan();
         $var['count_notif'] = $this->dokter->count_notifikasi();
+        $var['diagnosa'] = $this->dokter->get_diagnosa();
         $this->load->view('dokter/detail_pengobatan', $var);
     }
 

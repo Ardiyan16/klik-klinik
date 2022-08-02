@@ -49,7 +49,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><span class="fas fa-address-book"></span> </span>
                             </div>
-                            <input type="hidden" name="apoteker" value="<?= $this->session->userdata('id') ?>" class="form-control">
+                            <input type="hidden" name="apoteker" value="<?= $this->session->userdata('nama') ?>" class="form-control">
                             <input type="text" name="kasir" readonly value="<?= $this->session->userdata('nama') ?>" class="form-control">
                         </div>
                     </div>

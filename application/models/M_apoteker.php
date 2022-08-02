@@ -35,14 +35,13 @@ class M_apoteker extends CI_Model
 
     public function riwayat_transaksi()
     {
-        $this->db->select('ta.kd_trans, ta.id_resep, users.name, poliklinik.nama_poli, ta.tgl_trans, ta.apoteker, auth.nama, ta.total_biaya, resep.status_resep');
+        $this->db->select('ta.kd_trans, ta.id_resep, users.name, poliklinik.nama_poli, ta.tgl_trans, ta.apoteker, ta.apoteker, ta.total_biaya, resep.status_resep');
         $this->db->from('trans_apotik ta');
         $this->db->join('resep', 'ta.id_resep = resep.id');
         $this->db->join('pengobatan', 'resep.id_pengobatan = pengobatan.id');
         $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
         $this->db->join('users', 'pendaftaran.id_users = users.id');
         $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
-        $this->db->join('auth', 'auth.id = ta.apoteker');
         $this->db->order_by('ta.id', 'desc');
         return $this->db->get()->result();
     }
@@ -51,7 +50,6 @@ class M_apoteker extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('trans_apotik ta');
-        $this->db->join('auth', 'auth.id = ta.apoteker');
         $this->db->order_by('ta.id', 'desc');
         return $this->db->get()->result();
     }

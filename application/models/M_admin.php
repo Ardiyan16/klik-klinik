@@ -177,6 +177,55 @@ class M_admin extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function riwayat_pengobatan()
+    {
+        $this->db->select('*');
+        $this->db->from('payment');
+        $this->db->join('trans_apotik ta', 'payment.id_trans = ta.kd_trans');
+        $this->db->join('resep', 'ta.id_resep = resep.id');
+        $this->db->join('pengobatan', 'resep.id_pengobatan = pengobatan.id');
+        $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
+        $this->db->join('auth', 'pendaftaran.id_dokter = auth.id');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->where('pendaftaran.status', 3);
+        $this->db->where('status_pengobatan', 3);
+        $this->db->where('ta.status', 1);
+        return $this->db->get()->result();
+    }
+
+    public function list_obat($id)
+    {
+        $this->db->select('*');
+        $this->db->from('payment');
+        $this->db->join('trans_apotik ta', 'payment.id_trans = ta.kd_trans');
+        $this->db->join('detail_trans_apotik dta', 'ta.kd_trans = dta.kode_trans');
+        $this->db->join('obat', 'dta.kode_obat = obat.kd_obat');
+        $this->db->where('kd_payment', $id);
+        return $this->db->get()->result();
+    }   
+
+    public function detail_pengobatan($id)
+    {
+        $this->db->select('pendaftaran.kd_pendaftaran, users.name, poliklinik.nama_poli, pendaftaran.tgl_pendaftaran, pendaftaran.no_antrian, pendaftaran.gejala,
+        pendaftaran.gejala, pendaftaran.status status_daftar, tarif.diagnosa, pengobatan.tgl_pengobatan, pengobatan.status_pengobatan, ta.kd_trans, ta.tgl_trans,
+        ta.apoteker, ta.total_qty, ta.total_biaya, auth.nama, payment.kd_payment, payment.total_biaya_pengobatan, payment.jml_dibayarkan, payment.kembalian');
+        $this->db->from('payment');
+        $this->db->join('trans_apotik ta', 'payment.id_trans = ta.kd_trans');
+        $this->db->join('resep', 'ta.id_resep = resep.id');
+        $this->db->join('pengobatan', 'resep.id_pengobatan = pengobatan.id');
+        $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
+        $this->db->join('tarif', 'pengobatan.id_diagnosa = tarif.id');
+        $this->db->join('auth', 'pendaftaran.id_dokter = auth.id');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->where('pendaftaran.status', 3);
+        $this->db->where('status_pengobatan', 3);
+        $this->db->where('ta.status', 1);
+        $this->db->where('kd_payment', $id);
+        return $this->db->get()->row();
+    }
+
     function get_lastid()
     {
         $sql = $this->db->select('id');

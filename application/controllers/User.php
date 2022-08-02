@@ -8,6 +8,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_user', 'user');
+        $this->load->model('M_admin', 'admin');
         $this->load->library('form_validation');
     }
 
@@ -117,5 +118,26 @@ class User extends CI_Controller
         $var['notif_reject'] = $this->user->notifikasi_reject();
         $var['count_notif'] = $this->user->count_notifikasi();
         $this->load->view('users/detail_pendaftaran', $var);
+    }
+
+    public function riwayat_pengobatan()
+    {
+        $var['title'] = 'User | Riwayat Pengobatan';
+        $var['riwayat_pengobatan'] = $this->user->riwayat_pengobatan();
+        $var['notif_pendaftaran'] = $this->user->notifikasi_pendaftaran();
+        $var['notif_reject'] = $this->user->notifikasi_reject();
+        $var['count_notif'] = $this->user->count_notifikasi();
+        $this->load->view('users/riwayat_pengobatan', $var);
+    }
+
+    public function detail_pengobatan($id)
+    {
+        $var['title'] = 'User | Detail Pengobatan';
+        $var['view'] = $this->user->detail_pengobatan($id);
+        $var['list_obat'] = $this->user->list_obat($id);
+        $var['notif_pendaftaran'] = $this->user->notifikasi_pendaftaran();
+        $var['notif_reject'] = $this->user->notifikasi_reject();
+        $var['count_notif'] = $this->user->count_notifikasi();
+        $this->load->view('users/detail_pengobatan', $var);
     }
 }

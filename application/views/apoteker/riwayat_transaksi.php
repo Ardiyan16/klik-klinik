@@ -54,7 +54,7 @@
                                                 ?>
                                             </td>
                                             <td><?= date('d-m-Y', strtotime($show->tgl_trans)) ?></td>
-                                            <td><?= $show->nama ?></td>
+                                            <td><?= $show->apoteker ?></td>
                                             <td><?= 'Rp. ' . number_format($show->total_biaya) ?></td>
                                             <td>
                                                 <a href="<?= base_url('Apoteker/detail_transaksi/' . $show->kd_trans) ?>" title="Detail Transaksi" class="badge bg-primary" style="color: white;"><i class="fa fa-list"></i></a>

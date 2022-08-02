@@ -303,6 +303,21 @@ class Admin extends CI_Controller
         redirect('Admin/pengobatan');
     }
 
+    public function riwayat_pengobatan()
+    {
+        $var['title'] = 'Admin | Riwayat Pengobatan';
+        $var['riwayat_pengobatan'] = $this->admin->riwayat_pengobatan();
+        $this->load->view('admin/pengobatan/riwayat_pengobatan', $var);
+    }
+
+    public function detail_pengobatan($id)
+    {
+        $var['title'] = 'Admin | Detail Pengobatan';
+        $var['view'] = $this->admin->detail_pengobatan($id);
+        $var['list_obat'] = $this->admin->list_obat($id);
+        $this->load->view('admin/pengobatan/detail_pengobatan', $var);
+    }
+
     public function profile()
     {
         $id = $this->session->userdata('id');

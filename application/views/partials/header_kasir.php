@@ -65,7 +65,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>Dokter</h2>
+                            <h2>Kasir</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -81,19 +81,25 @@
                                     <a href="<?= base_url('Kasir') ?>"><i class="fa fa-home"></i> Dashboard</a>
                                 </li>
                                 <li>
+                                    <a href="<?= base_url('Kasir/pengobatan') ?>"><i class="fa fa-check"></i>Konfirmasi Pembayaran Pasien</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('Kasir/konfirmasi_non_pasien') ?>"><i class="fa fa-check"></i> Konfirmasi Pembayaran Non Pasien</a>
+                                </li>
+                                <li>
                                     <a><i class="fa fa-money"></i> Payment<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?= base_url('Kasir/payment_pasien') ?>"> Payment Pasien</a></li>
-                                        <li><a href="<?= base_url('Kasir/payment_nonPasien') ?>"> Payment Non Pasien</a></li>
+                                        <li><a href="<?= base_url('Kasir/payment_non_pasien') ?>"> Payment Non Pasien</a></li>
                                     </ul>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?= base_url('Apoteker/riwayat_transaksi') ?>"> Riwayat Pembayaran Pasien</a></li>
                                         <li><a href="<?= base_url('Apoteker/riwayat_transaksi_nonPasien') ?>"> Riwayat Pembayaran Non Pasien</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                             <br>
                         </div>
@@ -147,7 +153,7 @@
                                 <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                                     <?php foreach ($notif_pasien as $notif) { ?>
                                         <li class="nav-item">
-                                            <a class="dropdown-item" href="<?php echo base_url("Dokter/detail_pengobatan?id=" . $notif->id . "&id_notif=" . $notif->kode_trans); ?>">
+                                            <a class="dropdown-item" href="<?php echo base_url("Kasir/proses_payment?id=" . $notif->id_pengobatan . "&kode_trans=" . $notif->kode_trans); ?>">
                                                 <span class="message"><i class="fa fa-money"></i>
                                                     <?= $notif->keterangan ?>
                                                 </span>
@@ -157,7 +163,7 @@
                                     <?php } ?>
                                     <?php foreach ($notif_nonPasien as $notif) { ?>
                                         <li class="nav-item">
-                                            <a class="dropdown-item" href="<?php echo base_url("Dokter/detail_pengobatan?id=" . $notif->id . "&id_notif=" . $notif->kode_trans); ?>">
+                                            <a class="dropdown-item" href="<?php echo base_url("Kasir/proses_payment_nonPasien/" . $notif->kode_trans) ?>">
                                                 <span class="message"><i class="fa fa-money"></i>
                                                     <?= $notif->keterangan ?>
                                                 </span>

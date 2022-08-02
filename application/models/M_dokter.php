@@ -8,7 +8,7 @@ class M_dokter extends CI_Model
     public function get_pengobatan()
     {
         $id_dokter = $this->session->userdata('id');
-        $this->db->select('*');
+        $this->db->select('pengobatan.id, users.name, users.no_rekmed, poliklinik.nama_poli, auth.nama, pengobatan.tgl_pengobatan, pengobatan.status_pengobatan');
         $this->db->from('pengobatan');
         $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
         $this->db->join('auth', 'pendaftaran.id_dokter = auth.id');
@@ -34,6 +34,16 @@ class M_dokter extends CI_Model
         $this->db->where('auth.id', $id_dokter);
         $this->db->order_by('pengobatan.id', 'asc');
         return $this->db->get()->row();
+    }
+
+    public function get_diagnosa()
+    {
+        $id_dokter = $this->session->userdata('id');
+        $this->db->select('*');
+        $this->db->from('tarif');
+        $this->db->join('dokter', 'tarif.id_poli = dokter.id_poli');
+        $this->db->where('dokter.id_dokter', $id_dokter);
+        return $this->db->get()->result();
     }
 
     public function update_profile()
@@ -87,7 +97,7 @@ class M_dokter extends CI_Model
     {
         $post = $this->input->post();
         $this->id = $post['id'];
-        $this->diagnosa = $post['diagnosa'];
+        $this->id_diagnosa = $post['id_diagnosa'];
         $this->status_pengobatan = 1;
         $this->db->update('pengobatan', $this, ['id' => $post['id']]);
     }

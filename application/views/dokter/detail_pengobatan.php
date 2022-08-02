@@ -5,7 +5,7 @@
         <div class="page-title">
             <div class="title_left">
                 <h3>Detail Pengobatan</h3>
-                <a href="<?= base_url('Dokter/pengobatan') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a> 
+                <a href="<?= base_url('Dokter/pengobatan') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
             </div>
         </div>
         <div class="col-md-12 col-sm-12 ">
@@ -75,7 +75,11 @@
                 <form action="<?= base_url('Dokter/save_diagnosa') ?>" method="post">
                     <label>Diagnosa Penyakit</label>
                     <input type="hidden" value="<?= $view->id ?>" name="id">
-                    <input type="text" name="diagnosa" placeholder="Diagnosa Penyakit..." required class="form-control">
+                    <select class="form-control" name="id_diagnosa">
+                        <?php foreach ($diagnosa as $get) { ?>
+                            <option value="<?= $get->id ?>"><?= $get->diagnosa ?></option>
+                        <?php } ?>
+                    </select>
                     <br>
                     <label>Resep Obat</label>
                     <textarea class="form-control mb-3" required name="resep" rows="3"></textarea>
