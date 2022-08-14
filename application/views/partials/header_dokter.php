@@ -83,9 +83,9 @@
                                 <li>
                                     <a href="<?= base_url('Dokter/pengobatan') ?>"><i class="fa fa-users"></i> Data Pasien Pengobatan</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="<?= base_url('Dokter/konsultasi') ?>"><i class="fa fa-handshake"></i> Konsultasi</a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a href="<?= base_url('Dokter/riwayat_pengobatan') ?>"><i class="fa fa-history"></i> Riwayat Pengobatan</a>
                                 </li>

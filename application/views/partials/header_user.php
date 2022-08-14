@@ -82,9 +82,9 @@
                                 <li>
                                     <a href="<?= base_url('User/pilih_layanan') ?>"><i class="fa fa-list"></i> Pendaftaran Online</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="<?= base_url('Admin/konsultasi') ?>"><i class="fa fa-handshake"></i> Konsultasi</a>
-                                </li>
+                                </li> -->
                                 <li>
                                     <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">

@@ -9,12 +9,45 @@ class Owner extends CI_Controller
         parent::__construct();
         $this->load->model('M_owner', 'owner');
         $this->load->model('M_admin', 'admin');
+        $this->load->model('M_apoteker', 'apoteker');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
         $var['title'] = 'Owner | Dashboard';
+        $var['jml_pasien_online'] = $this->owner->count_pasien_online();
+        $var['jml_pasien_offline'] = $this->owner->count_pasien_offline();
+        $var['jml_pengobatan'] = $this->owner->count_pengobatan();
+        $var['jml_transaksi_pasien'] = $this->owner->count_trans_pasien();
+        foreach ($this->admin->grafik_pengunjung()->result_array() as $row) {
+            $var['grafik_pengobatan'][] = (int) $row['Januari'];
+            $var['grafik_pengobatan'][] = (int) $row['Februari'];
+            $var['grafik_pengobatan'][] = (int) $row['Maret'];
+            $var['grafik_pengobatan'][] = (int) $row['April'];
+            $var['grafik_pengobatan'][] = (int) $row['Mei'];
+            $var['grafik_pengobatan'][] = (int) $row['Juni'];
+            $var['grafik_pengobatan'][] = (int) $row['Juli'];
+            $var['grafik_pengobatan'][] = (int) $row['Agustus'];
+            $var['grafik_pengobatan'][] = (int) $row['September'];
+            $var['grafik_pengobatan'][] = (int) $row['Oktober'];
+            $var['grafik_pengobatan'][] = (int) $row['November'];
+            $var['grafik_pengobatan'][] = (int) $row['Desember'];
+        }
+        foreach ($this->admin->grafik_transaksi()->result_array() as $row) {
+            $var['grafik_transaksi'][] = (int) $row['Januari'];
+            $var['grafik_transaksi'][] = (int) $row['Februari'];
+            $var['grafik_transaksi'][] = (int) $row['Maret'];
+            $var['grafik_transaksi'][] = (int) $row['April'];
+            $var['grafik_transaksi'][] = (int) $row['Mei'];
+            $var['grafik_transaksi'][] = (int) $row['Juni'];
+            $var['grafik_transaksi'][] = (int) $row['Juli'];
+            $var['grafik_transaksi'][] = (int) $row['Agustus'];
+            $var['grafik_transaksi'][] = (int) $row['September'];
+            $var['grafik_transaksi'][] = (int) $row['Oktober'];
+            $var['grafik_transaksi'][] = (int) $row['November'];
+            $var['grafik_transaksi'][] = (int) $row['Desember'];
+        }
         $this->load->view('owner/dashboard', $var);
     }
 
@@ -136,4 +169,47 @@ class Owner extends CI_Controller
         $this->session->set_flashdata('success_delete', true);
         redirect('Owner/tarif_pelayanan');
     }
+
+    public function riwayat_pendaftaran()
+    {
+        $var['title'] = 'Owner | Riwayat Pendaftaran';
+        $var['riwayat_pendaftaran'] = $this->owner->riwayat_pendaftaran();
+        $this->load->view('owner/riwayat_pendaftaran', $var);
+    }
+
+    public function riwayat_pengobatan()
+    {
+        $var['title'] = 'Owner | Riwayat Pengobatan';
+        $var['riwayat_pengobatan'] = $this->admin->riwayat_pengobatan();
+        $this->load->view('owner/riwayat_pengobatan', $var);
+    }
+
+    public function detail_riwayat($id)
+    {
+        $var['title'] = 'Owner | Detail Riwayat';
+        $var['view'] = $this->admin->detail_pengobatan($id);
+        $var['list_obat'] = $this->admin->list_obat($id);
+        $this->load->view('owner/detail_riwayat', $var);
+    }
+
+    public function riwayat_trans()
+    {
+        $var['title'] = 'Apoteker | Riwayat Transaksi';
+        $var['riwayat_transaksi'] = $this->apoteker->riwayat_transaksi_nonPasien();
+        $this->load->view('owner/riwayat_trans', $var);
+    }
+
+    public function detail_trans($id)
+    {
+        $var['title'] = 'Apoteker | Detail Transaksi';
+        $var['view'] = $this->db->get_where('trans_apotik', ['kd_trans' => $id])->row();
+        $var['detail_transaksi'] = $this->apoteker->detail_transaksi($id);
+        $this->load->view('owner/detail_trans', $var);
+    }
+
+    public function pembukuan()
+    {
+        $var['title'] = 'Owner | Pembukuan';
+    }
+
 }

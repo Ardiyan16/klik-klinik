@@ -85,6 +85,18 @@ class M_dokter extends CI_Model
         $this->db->from('pengobatan');
         $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
         $this->db->where('id_dokter', $id);
+        $this->db->where('status_pengobatan', 3);
+        return $this->db->get()->row()->jml;
+    }
+
+    public function count_pengobatan_baru()
+    {
+        $id = $this->session->userdata('id');
+        $this->db->select('COUNT(pengobatan.id) as jml');
+        $this->db->from('pengobatan');
+        $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
+        $this->db->where('id_dokter', $id);
+        $this->db->where('status_pengobatan', 0);
         return $this->db->get()->row()->jml;
     }
 
@@ -105,7 +117,7 @@ class M_dokter extends CI_Model
     public function riwayat_pengobatan()
     {
         $id_dokter = $this->session->userdata('id');
-        $this->db->select('*');
+        $this->db->select('pengobatan.id, users.name, users.no_rekmed, poliklinik.nama_poli, auth.nama, pengobatan.tgl_pengobatan, pengobatan.status_pengobatan');
         $this->db->from('pengobatan');
         $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
         $this->db->join('auth', 'pendaftaran.id_dokter = auth.id');
@@ -114,6 +126,20 @@ class M_dokter extends CI_Model
         $this->db->where('auth.id', $id_dokter);
         $this->db->order_by('pengobatan.id', 'asc');
         return $this->db->get()->result();
+    }
+
+    public function detail_riwayat($id)
+    {
+        $id_dokter = $this->session->userdata('id');
+        $this->db->select('pengobatan.*, users.name, users.nik, users.no_rekmed, users.tempat_lahir, users.tgl_lahir, poliklinik.nama_poli, auth.nama, pendaftaran.gejala');
+        $this->db->from('pengobatan');
+        $this->db->join('pendaftaran', 'pengobatan.kode_pendaftaran = pendaftaran.kd_pendaftaran');
+        $this->db->join('auth', 'pendaftaran.id_dokter = auth.id');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->where('pengobatan.id', $id);
+        $this->db->where('auth.id', $id_dokter);
+        return $this->db->get()->row();
     }
 
 }

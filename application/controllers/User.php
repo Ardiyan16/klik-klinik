@@ -140,4 +140,12 @@ class User extends CI_Controller
         $var['count_notif'] = $this->user->count_notifikasi();
         $this->load->view('users/detail_pengobatan', $var);
     }
+
+    public function cetak_detail_pengobatan($id)
+    {
+        $var['title'] = 'User | Cetak Detail Pengobatan';
+        $var['view'] = $this->user->detail_pengobatan($id);
+        $var['list_obat'] = $this->user->list_obat($id);
+        $this->load->view('users/cetak', $var);
+    }
 }

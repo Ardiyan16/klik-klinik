@@ -20,6 +20,36 @@ class Admin extends CI_Controller
         $var['jml_notif2'] = $this->admin->count_notif_pendaftaran();
         $var['jml_user_online'] = $this->admin->count_user_active();
         $var['jml_user_offline'] = $this->admin->count_user_offline();
+        $var['jml_pengobatan'] = $this->admin->count_pengobatan();
+        $var['jml_transaksi'] = $this->admin->count_transaksi();
+        foreach ($this->admin->grafik_pengunjung()->result_array() as $row) {
+            $var['grafik_pengobatan'][] = (int) $row['Januari'];
+            $var['grafik_pengobatan'][] = (int) $row['Februari'];
+            $var['grafik_pengobatan'][] = (int) $row['Maret'];
+            $var['grafik_pengobatan'][] = (int) $row['April'];
+            $var['grafik_pengobatan'][] = (int) $row['Mei'];
+            $var['grafik_pengobatan'][] = (int) $row['Juni'];
+            $var['grafik_pengobatan'][] = (int) $row['Juli'];
+            $var['grafik_pengobatan'][] = (int) $row['Agustus'];
+            $var['grafik_pengobatan'][] = (int) $row['September'];
+            $var['grafik_pengobatan'][] = (int) $row['Oktober'];
+            $var['grafik_pengobatan'][] = (int) $row['November'];
+            $var['grafik_pengobatan'][] = (int) $row['Desember'];
+        }
+        foreach ($this->admin->grafik_transaksi()->result_array() as $row) {
+            $var['grafik_transaksi'][] = (int) $row['Januari'];
+            $var['grafik_transaksi'][] = (int) $row['Februari'];
+            $var['grafik_transaksi'][] = (int) $row['Maret'];
+            $var['grafik_transaksi'][] = (int) $row['April'];
+            $var['grafik_transaksi'][] = (int) $row['Mei'];
+            $var['grafik_transaksi'][] = (int) $row['Juni'];
+            $var['grafik_transaksi'][] = (int) $row['Juli'];
+            $var['grafik_transaksi'][] = (int) $row['Agustus'];
+            $var['grafik_transaksi'][] = (int) $row['September'];
+            $var['grafik_transaksi'][] = (int) $row['Oktober'];
+            $var['grafik_transaksi'][] = (int) $row['November'];
+            $var['grafik_transaksi'][] = (int) $row['Desember'];
+        }
         // var_dump($var['jml_user_online']);
         $this->load->view('admin/dashboard', $var);
     }

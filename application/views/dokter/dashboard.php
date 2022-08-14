@@ -33,36 +33,28 @@
     <!-- top tiles -->
     <div class="row" style="display: inline-block;">
         <div class="top_tiles">
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-stethoscope"></i></div>
+                    <div class="count"><?= $jml_pengobatan_baru ?></div>
+                    <h3>Pengobatan Baru</h3>
+                    <p>Jumlah pengobatan baru</p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
                 <div class="tile-stats">
                     <div class="icon"><i class="fa fa-stethoscope"></i></div>
                     <div class="count"><?= $jml_pengobatan ?></div>
-                    <h3>Pengobatan</h3>
-                    <p>Jumlah Pengobatan</p>
+                    <h3>Pengobatan Selesai</h3>
+                    <p>Jumlah pengobatan selesai</p>
                 </div>
             </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
+            <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 ">
                 <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-stethoscope"></i></div>
-                    <div class="count">2</div>
+                    <div class="icon"><i class="fa fa-handshake"></i></div>
+                    <div class="count"></div>
                     <h3>Konsultasi</h3>
-                    <p>Jumlah Kosultasi</p>
-                </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
-                <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
-                    <div class="count">179</div>
-                    <h3>New Sign ups</h3>
-                    <p>Lorem ipsum psdea itgum rixt.</p>
-                </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
-                <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-check-square-o"></i></div>
-                    <div class="count">179</div>
-                    <h3>New Sign ups</h3>
-                    <p>Lorem ipsum psdea itgum rixt.</p>
+                    <p>Jumlah konsultasi</p>
                 </div>
             </div>
         </div>

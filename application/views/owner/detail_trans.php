@@ -1,10 +1,10 @@
-<?php $this->load->view('partials/header_apoteker.php') ?>
+<?php $this->load->view('partials/header.php') ?>
 
 <div class="right_col" role="main">
     <div class="page-title">
         <div class="title_left">
             <h3>Riwayat Detail Transaksi</h3>
-            <a href="<?= base_url('Apoteker/riwayat_transaksi') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
+            <a href="<?= base_url('Owner/riwayat_trans') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
         </div>
     </div>
     <div class="col-md-12 col-sm-12 ">

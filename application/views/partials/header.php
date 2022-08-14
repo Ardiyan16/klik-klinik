@@ -85,7 +85,20 @@
                                     <a href="<?= base_url('Owner/tarif_pelayanan') ?>"><i class="fa fa-list"></i> Tarif Pelayanan</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)"><i class="fa fa-book"></i> Pembukuan</a>
+                                    <a><i class="fa fa-history"></i> Riwayat<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Owner/riwayat_pendaftaran') ?>"> Riwayat Pendaftaran</a></li>
+                                        <li><a href="<?= base_url('Owner/riwayat_pengobatan') ?>"> Riwayat Pengobatan</a></li>
+                                        <li><a href="<?= base_url('Owner/riwayat_trans') ?>"> Riwayat Transaksi Non Pasien</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-book"></i> Manajemen<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?= base_url('Owner/pembukuan') ?>"> Pembukuan</a></li>
+                                        <li><a href="<?= base_url('Owner/Penggajian') ?>">Penggajian</a></li>
+                                        <li><a href="<?= base_url('Owner/Pendapatan') ?>">Pendapatan</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>

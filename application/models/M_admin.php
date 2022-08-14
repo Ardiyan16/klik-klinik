@@ -164,6 +164,18 @@ class M_admin extends CI_Model
         return $this->db->count_all_results('users');
     }
 
+    public function count_pengobatan()
+    {
+        $this->db->where('status_pengobatan', 3);
+        return $this->db->count_all_results('pengobatan');
+    }
+
+    public function count_transaksi()
+    {
+        $this->db->where('status', 1);
+        return $this->db->count_all_results('trans_apotik');
+    }
+
     public function get_pengobatan()
     {
         $this->db->select('*');
@@ -191,6 +203,7 @@ class M_admin extends CI_Model
         $this->db->where('pendaftaran.status', 3);
         $this->db->where('status_pengobatan', 3);
         $this->db->where('ta.status', 1);
+        $this->db->order_by('kd_payment', 'asc');
         return $this->db->get()->result();
     }
 
@@ -203,7 +216,7 @@ class M_admin extends CI_Model
         $this->db->join('obat', 'dta.kode_obat = obat.kd_obat');
         $this->db->where('kd_payment', $id);
         return $this->db->get()->result();
-    }   
+    }
 
     public function detail_pengobatan($id)
     {
@@ -787,5 +800,53 @@ class M_admin extends CI_Model
         $this->tgl_pengobatan = $post['tgl_pengobatan'];
         $this->status_pengobatan = 0;
         $this->db->insert($this->pengobatan, $this);
+    }
+
+    public function grafik_pengunjung()
+    {
+        $tahun = date('Y');
+        $bc = $this->db->query("
+ 
+       SELECT
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=1)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Januari`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=2)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Februari`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=3)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Maret`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=4)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `April`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=5)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Mei`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=6)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Juni`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=7)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Juli`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=8)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Agustus`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=9)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `September`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=10)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Oktober`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=11)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `November`,
+       ifnull((SELECT count(id) FROM (pengobatan)WHERE((Month(tgl_pengobatan)=12)AND (YEAR(tgl_pengobatan)='$tahun'))),0) AS `Desember`
+       from pengobatan GROUP BY YEAR(tgl_pengobatan) 
+ 
+ ");
+        return $bc;
+    }
+
+    public function grafik_transaksi()
+    {
+        $tahun = date('Y');
+        $bc = $this->db->query("
+ 
+       SELECT
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=1)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Januari`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=2)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Februari`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=3)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Maret`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=4)AND (YEAR(tgl_trans)='$tahun'))),0) AS `April`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=5)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Mei`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=6)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Juni`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=7)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Juli`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=8)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Agustus`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=9)AND (YEAR(tgl_trans)='$tahun'))),0) AS `September`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=10)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Oktober`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=11)AND (YEAR(tgl_trans)='$tahun'))),0) AS `November`,
+       ifnull((SELECT count(id) FROM (trans_apotik)WHERE((Month(tgl_trans)=12)AND (YEAR(tgl_trans)='$tahun'))),0) AS `Desember`
+       from trans_apotik GROUP BY YEAR(tgl_trans) 
+ 
+ ");
+        return $bc;
     }
 }

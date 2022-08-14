@@ -1,17 +1,16 @@
-<?php $this->load->view('partials/header_user.php') ?>
+<?php $this->load->view('partials/header.php') ?>
 
 <div class="right_col" role="main">
     <div class="page-title">
         <div class="title_left">
-            <h3>Detail Pembayaran</h3>
-            <a href="<?= base_url('User/riwayat_pengobatan') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
-            <a href="<?= base_url('User/cetak_detail_pengobatan/' . $view->kd_payment) ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-print"></i> Cetak</a>
+            <h3>Detail Riwayat Pengobatan</h3>
+            <a href="<?= base_url('Owner/riwayat_pengobatan') ?>" style="margin-left: 15px; margin-top: 20px;" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i> Kembali</a>
         </div>
     </div>
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Tabel Detail Pembayaran</h2>
+                <h2>Tabel Detail Riwayat Pengobatan</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -79,7 +78,7 @@
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <p>Kode Transaksi Obat : <?= $view->kd_trans ?></p>
+                        <p>Kode Transaksi Obat : <?= $view->kd_payment ?></p>
                         <p>Total Biaya &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?= 'Rp. ' . number_format($view->total_biaya_pengobatan) ?></p>
                         <p>Jumlah Pembayaran : <?= 'Rp. ' . number_format($view->jml_dibayarkan) ?></p>
                         <p>Kembalian &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?= 'Rp. ' . number_format($view->kembalian) ?></p>

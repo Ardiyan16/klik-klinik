@@ -7,6 +7,7 @@ class M_owner extends CI_Model
     private $role = 'role';
     private $visimisi = 'visi_misi';
     private $tarif_layanan = 'tarif';
+    private $users = 'users';
 
     public function get_team()
     {
@@ -26,6 +27,30 @@ class M_owner extends CI_Model
         return $this->db->count_all_results($this->visimisi);
     }
 
+    public function count_pasien_online()
+    {
+        $this->db->where('status', 1);
+        return $this->db->count_all_results($this->users);
+    }
+
+    public function count_pasien_offline()
+    {
+        $this->db->where('status', 2);
+        return $this->db->count_all_results($this->users);
+    }
+
+    public function count_pengobatan()
+    {
+        $this->db->where('status_pengobatan', 3);
+        return $this->db->count_all_results('pengobatan');
+    }
+
+    public function count_trans_pasien()
+    {
+        $this->db->where('status', 1);
+        return $this->db->count_all_results('trans_apotik');
+    }
+
     public function get_visimisi()
     {
         return $this->db->get($this->visimisi)->row();
@@ -36,6 +61,16 @@ class M_owner extends CI_Model
         $this->db->select('tarif.*, poliklinik.nama_poli');
         $this->db->from('tarif');
         $this->db->join('poliklinik', 'tarif.id_poli = poliklinik.id');
+        return $this->db->get()->result();
+    }
+
+    public function riwayat_pendaftaran()
+    {
+        $this->db->select('pendaftaran.*, users.name, users.no_rekmed, poliklinik.nama_poli');
+        $this->db->from('pendaftaran');
+        $this->db->join('users', 'pendaftaran.id_users = users.id');
+        $this->db->join('poliklinik', 'pendaftaran.id_poli = poliklinik.id');
+        $this->db->order_by('id', 'desc');
         return $this->db->get()->result();
     }
 

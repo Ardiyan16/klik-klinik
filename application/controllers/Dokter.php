@@ -15,7 +15,8 @@ class Dokter extends CI_Controller
     public function index()
     {
         $var['title'] = 'Dokter | dashboard';
-        $var['jml_pengobatan'] = $this->dokter->count_pengobatan();   
+        $var['jml_pengobatan_baru'] = $this->dokter->count_pengobatan_baru();
+        $var['jml_pengobatan'] = $this->dokter->count_pengobatan();
         $var['notif_pengobatan'] = $this->dokter->notifikasi_pengobatan();
         $var['count_notif'] = $this->dokter->count_notifikasi();
         $this->load->view('dokter/dashboard', $var);
@@ -84,9 +85,22 @@ class Dokter extends CI_Controller
         $this->load->view('dokter/riwayat_pengobatan', $var);
     }
 
+    public function detail_riwayat($id)
+    {
+        $var['title'] = 'Dokter | detail riwayat';
+        $var['view'] = $this->dokter->detail_riwayat($id);
+        // var_dump($var['view']);
+        $var['notif_pengobatan'] = $this->dokter->notifikasi_pengobatan();
+        $var['count_notif'] = $this->dokter->count_notifikasi();
+        $var['diagnosa'] = $this->dokter->get_diagnosa();
+        $this->load->view('dokter/detail_riwayat', $var);
+    }
+
     public function konsultasi()
     {
-        // $var['title'] = 'Dokter | Konsultasi';
-        // $var['konsultasi'] = 
+        $var['title'] = 'Dokter | Konsultasi';
+        $var['notif_pengobatan'] = $this->dokter->notifikasi_pengobatan();
+        $var['count_notif'] = $this->dokter->count_notifikasi();
+        $this->load->view('dokter/konsultasi', $var);
     }
 }
